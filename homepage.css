@@ -1,0 +1,9 @@
+.container-fluid{
+    border: dashed;
+}
+
+.title-bar img{
+    margin-left: 5%;
+    width: 90vw;
+    height: 43vw;
+}
