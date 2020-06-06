@@ -8,13 +8,49 @@
   </head>
   <body>
     <div class="title-bar container-fluid">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/gHLoccRIVLk?controls=0&showinfo=0&modestbranding=0&" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <video class="vid" play autoplay=true loop="true" width="1580" >
+        <source src="/pictures/title_bar_background1.mp4" type="video/mp4">
+      </video>
+      <h1 id="title">
+        Waccurate
+      </h1>
+      <h3 id="sub-description">
+        See how accurate Accuweather truly is in predicting future weather
+      </h3>
+    </div>
+    <div class="container">
+      <div class="btn-group-toggle" data-toggle="buttons">
+        <span class="input-group-text">Temperature</span>
+        <label class="btn btn-secondary active rounded">
+          <input type="checkbox" checked> Fahrenheit
+        </label>
+        <label class="btn btn-secondary active rounded">
+          <input type="checkbox" checked> Celsius
+        </label>
+      </div>
+    </div>
+    <div class="container">
+      <div class="input-group mb-3">
+        <div class="input-group-addon"></div>
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      </div>
     </div>
     
   </body>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="Bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="homepage.css">
 </html>
