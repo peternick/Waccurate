@@ -1,9 +1,9 @@
+/*                      ****** tile bar *******   */
 .title-bar{
     border: dashed;
     padding: 0em;
     overflow: hidden;
 }
-
 #title{
     position: absolute;
     top: 1em;
@@ -16,7 +16,6 @@
     color: white;
     text-shadow: 5px 5px 10px darkblue, 0px 10px 30px purple;
 }
-
 #sub-description{
     position: absolute;
     top: 20em;
@@ -25,3 +24,28 @@
     text-shadow: 2px 1px 1px darkblue;
 }
 
+
+
+#row1, #row2{
+    margin-left: 17vw;
+}
+#row1{
+    margin-top: 10vw;
+}
+#row2{
+    margin-top: 4vw;
+}
+.btn{
+    margin-left: 2em;
+}
+
+
+img[src="media/pictures/Blank_US_map.png"]{
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 5vw;
+    border: ridge;
+    border-radius: 4em;
+    border-width: 1em;
+    border-color: maroon;
+}

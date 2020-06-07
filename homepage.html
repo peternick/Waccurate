@@ -7,44 +7,137 @@
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <div class="title-bar container-fluid">
-      <video class="vid" play autoplay=true loop="true" width="1580" >
-        <source src="/pictures/title_bar_background1.mp4" type="video/mp4">
-      </video>
-      <h1 id="title">
-        Waccurate
-      </h1>
-      <h3 id="sub-description">
-        See how accurate Accuweather truly is in predicting future weather
-      </h3>
-    </div>
-    <div class="container">
-      <div class="btn-group-toggle" data-toggle="buttons">
-        <span class="input-group-text">Temperature</span>
-        <label class="btn btn-secondary active rounded">
-          <input type="checkbox" checked> Fahrenheit
-        </label>
-        <label class="btn btn-secondary active rounded">
-          <input type="checkbox" checked> Celsius
-        </label>
+      <div class="title-bar container-fluid">
+        <video class="vid" play autoplay=true loop="true" width="1580" >
+          <source src="media/videos/title_bar_background.mp4" type="video/mp4">
+        </video>
+        <h1 id="title">
+          Waccurate
+        </h1>
+        <h3 id="sub-description">
+          See how accurate Accuweather truly is in predicting future weather
+        </h3>
       </div>
-    </div>
-    <div class="container">
-      <div class="input-group mb-3">
-        <div class="input-group-addon"></div>
-          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+      <div class="row" id="row1">
+        <div class="col-lg-4">
+          <div class="container" id="temp-unit-toggle">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Temperature</span>
+              </div>
+              <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active rounded">
+                  <input type="checkbox" checked> Fahrenheit
+                </label>
+                <label class="btn btn-secondary active rounded">
+                  <input type="checkbox" checked> Celsius
+                </label>
+              </div>
+            </div>
           </div>
         </div>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="col lg-4">
+          <div class="container" id="weather-icons-toggle">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">Displayed map weather icons </span>
+              </div>
+              <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active rounded">
+                  <input type="checkbox" checked> Temperature
+                </label>
+                <label class="btn btn-secondary active rounded">
+                  <input type="checkbox" checked> Weather
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
+      <div class="row" id="row2">
+        <div class="col-lg-3">
+          <div class="container" id="states-dropdown">
+            <div class="input-group flex-nowrap mb-3">
+              
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="container">
+            <div class="input-group flex-nowrap mb-3">
+
+                <input type="text" class="form-control" placeholder="number of hours from now" aria-label="Text input with dropdown button">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="container">
+            <div class="input-group flex-nowrap mb-3">
+              <div class="input-group-prepend"></div>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
+                <!-- use 
+                  @media (max-width: 500px) {
+                  .dropdown-menu{
+                        height:200px;
+                        overflow-y:auto;
+                    }
+                  }
+                for scrollable dropdown -->
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-container container-fluid">
+        <!-- Image Map Generated by http://www.image-map.net/ -->
+        <img src="media/pictures/Blank_US_map.png" usemap="#image-map">
+
+        <map name="image-map">
+            <area target="" alt="Lousisiana" title="Lousisiana" href="la" coords="1122,1032,1154,1033,1172,1042,1186,1035,1221,1055,1256,1060,1272,1058,1262,1039,1299,1058,1288,1037,1283,1023,1246,1009,1274,998,1265,973,1239,970,1207,970,1207,931,1219,908,1205,874,1103,881,1101,927,1122,979,1113,1010" shape="poly">
+            <area target="" alt="Mississippi" title="Mississippi" href="mi" coords="1225,910,1216,819,1232,785,1246,776,1324,773,1328,992,1307,988,1296,988,1273,964,1208,972" shape="poly">
+            <area target="" alt="Alabama" title="Alabama" href="aa" coords="1330,769,1420,758,1457,868,1462,882,1457,905,1464,939,1363,951,1374,972,1363,986,1352,974,1337,986,1324,882,1326,833" shape="poly">
+            <area target="" alt="Georgia" title="Georgia" href="ga" coords="1422,758,1508,746,1507,760,1526,776,1549,797,1583,833,1614,863,1611,887,1599,923,1590,937,1579,953,1563,951,1468,951" shape="poly">
+            <area target="" alt="Florida" title="Florida" href="fa" coords="1430,978,1377,981,1370,956,1413,953,1467,941,1471,956,1582,953,1596,935,1614,946,1628,992,1697,1108,1697,1163,1686,1195,1639,1154,1577,1077,1572,1022,1501,986,1464,1004" shape="poly">
+            <area target="" alt="South Carolina" title="South Carolina" href="sc" coords="1524,741,1580,727,1609,735,1649,741,1688,760,1695,780,1667,813,1644,847,1619,866,1575,810,1540,783,1513,760" shape="poly">
+            <area target="" alt="North Carolina" title="North Carolina" href="nc" coords="1552,665,1760,628,1773,642,1748,656,1783,660,1773,690,1753,701,1766,709,1725,747,1711,762,1695,770,1644,736,1601,741,1577,725,1531,738,1499,747,1471,745,1538,695" shape="poly">
+            <area target="" alt="Virginia" title="Virginia" href="va" coords="1497,671,1532,637,1578,630,1604,605,1617,571,1656,524,1694,519,1703,543,1735,559,1748,603,1762,628,1663,647,1591,659" shape="poly">
+            <area target="" alt="Maryland" title="Maryland" href="ma" coords="1738,553,1711,550,1708,529,1692,516,1679,506,1655,493,1731,479,1748,507,1757,537,1787,537,1768,559,1762,592" shape="poly">
+            <area target="" alt="Pennsylvania" title="Pennsylvania" href="pa" coords="1556,400,1579,387,1580,398,1632,392,1731,369,1759,392,1746,414,1757,437,1764,460,1741,472,1577,507" shape="poly">
+            <area target="" alt="West Virginia" title="West Virginia" href="wv" coords="1518,592,1527,577,1536,547,1550,525,1571,485,1578,509,1614,508,1617,520,1640,511,1667,499,1675,516,1651,532,1630,548,1624,559,1612,578,1605,594,1598,612,1580,624,1539,630" shape="poly">
+            <area target="" alt="Ohio" title="Ohio" href="oo" coords="1448,569,1429,561,1415,442,1455,435,1491,442,1521,437,1551,405,1565,479,1554,536,1519,566,1517,584,1485,573" shape="poly">
+            <area target="" alt="Kentucky" title="Kentucky" href="ky" coords="1289,672,1310,670,1310,659,1324,645,1342,629,1367,622,1400,615,1418,589,1436,569,1458,578,1492,583,1506,592,1522,610,1529,622,1504,651,1492,667,1443,672,1328,688,1292,698,1282,682" shape="poly">
+            <area target="" alt="Tenesse" title="Tenesse" href="tn" coords="1271,705,1324,700,1370,689,1542,668,1536,679,1519,697,1501,709,1481,718,1466,750,1425,755,1252,769" shape="poly">
+            <area target="" alt="Indianna" title="Indianna" href="ia" coords="1321,632,1326,609,1330,581,1330,565,1319,456,1352,449,1405,441,1421,576,1409,591,1388,612,1360,622" shape="poly">
+            <area target="" alt="Michigan" title="Michigan" href="mn" coords="1349,440,1354,389,1344,352,1347,299,1384,262,1416,253,1434,274,1441,309,1434,324,1439,336,1462,325,1481,371,1481,385,1455,431" shape="poly">
+            <area target="" alt="disabled" title="disabled" href="disable" coords="1108,1031,1027,1084,969,1130,969,1219,896,1171,836,1061,783,1024,734,1061,674,1005,601,925,547,920,524,936,382,890,285,837,214,824,160,754,93,697,66,626,40,508,27,430,45,336,52,287,84,202,126,128,123,34,167,61,188,48,188,15,416,68,580,103,718,115,854,121,1047,121,1103,151,1149,161,1188,161,1214,168,1151,220,1177,227,1230,211,1264,214,1331,218,1370,209,1395,223,1405,237,1343,301,1336,372,1352,417,1328,451,1315,477,1322,603,1299,661,1239,762,1206,856,1202,872,1100,875,1116,972" shape="poly">
+            <area target="" alt="Delaware" title="Delaware" href="de" coords="1739,479,1755,530,1780,527,1754,490" shape="poly">
+            <area target="" alt="New Jersey" title="New Jersey" href="nj" coords="1782,398,1762,394,1754,412,1761,435,1775,447,1764,465,1759,481,1771,490,1785,491,1801,461,1798,431" shape="poly">
+            <area target="" alt="New York" title="New York" href="ny" coords="1734,370,1584,396,1609,358,1604,331,1665,324,1687,305,1683,283,1711,236,1766,216,1779,276,1793,305,1794,370,1794,386,1789,400,1755,389" shape="poly">
+            <area target="" alt="Connecticut" title="Connecticut" href="ct" coords="1796,394,1794,350,1849,341,1856,366,1828,380" shape="poly">
+            <area target="" alt="Rhode Island" title="Rhode Island" href="ri" coords="1861,362,1852,334,1867,338,1872,354" shape="poly">
+            <area target="" alt="Massachusetts" title="Massachusetts" href="ms" coords="1798,315,1867,299,1875,290,1884,299,1883,316,1898,327,1909,320,1891,347,1874,350,1867,334,1798,345" shape="poly">
+            <area target="" alt="Vermont" title="Vermont" href="vt" coords="1766,212,1821,198,1822,225,1814,240,1814,267,1817,295,1815,306,1794,309" shape="poly">
+            <area target="" alt="New Hampshire" title="New Hampshire" href="nh" coords="1835,186,1868,281,1851,297,1819,306,1819,240,1824,194" shape="poly">
+            <area target="" alt="Maine" title="Maine" href="me" coords="1865,65,1875,76,1895,65,1914,69,1928,126,1980,161,1934,193,1916,196,1907,223,1898,237,1879,258,1870,274,1838,182" shape="poly">
+        </map>
+      </div>
   </body>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -52,5 +145,11 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="homepage.css">
+<script type="text/javascript" src="plugins/image-map-resizer/js/imageMapResizer.min.js"></script>  
+<script type="text/javascript">
+
+  $('map').imageMapResize();
+
+</script>
+<link rel="stylesheet" type="text/css" href="homepage.css">
 </html>
