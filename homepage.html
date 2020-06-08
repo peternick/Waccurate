@@ -7,6 +7,7 @@
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    <div class="container-fluid" id="super-container">
       <div class="title-bar container-fluid">
         <video class="vid" play autoplay=true loop="true" width="1580" >
           <source src="media/videos/title_bar_background.mp4" type="video/mp4">
@@ -18,88 +19,88 @@
           See how accurate Accuweather truly is in predicting future weather
         </h3>
       </div>
-      <div class="row" id="row1">
-        <div class="col-lg-4">
-          <div class="container" id="temp-unit-toggle">
-            <div class="input-group flex-nowrap">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping">Temperature</span>
-              </div>
-              <div class="btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active rounded">
-                  <input type="checkbox" checked> Fahrenheit
-                </label>
-                <label class="btn btn-secondary active rounded">
-                  <input type="checkbox" checked> Celsius
-                </label>
+    <div id="input-background">
+    </div>
+      <div class="container">
+        <div class="row" id="row1">
+          <div class="col-lg-5">
+            <div class="container" id="temp-unit-toggle">
+              <div class="input-group flex-nowrap">
+                <p class="input-label" id="addon-wrapping">Temperature:</p>
+                <div class="btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active rounded">
+                    <input type="checkbox" checked> Fahrenheit
+                  </label>
+                  <label class="btn btn-secondary active rounded">
+                    <input type="checkbox" checked> Celsius
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col lg-4">
-          <div class="container" id="weather-icons-toggle">
-            <div class="input-group flex-nowrap">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping">Displayed map weather icons </span>
-              </div>
-              <div class="btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active rounded">
-                  <input type="checkbox" checked> Temperature
-                </label>
-                <label class="btn btn-secondary active rounded">
-                  <input type="checkbox" checked> Weather
-                </label>
+          <div class="col lg-4">
+            <div class="container" id="weather-icons-toggle">
+              <div class="input-group flex-nowrap">
+                <p class="input-label" id="addon-wrapping">Displayed map weather icons:</p>
+                <div class="btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active rounded">
+                    <input type="checkbox" checked> Temperature
+                  </label>
+                  <label class="btn btn-secondary active rounded">
+                    <input type="checkbox" checked> Weather
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row" id="row2">
-        <div class="col-lg-3">
-          <div class="container" id="states-dropdown">
-            <div class="input-group flex-nowrap mb-3">
-              
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-              
+      <div class="container">
+        <div class="row" id="row2">
+          <div class="col-lg-4">
+            <div class="container" id="states-dropdown">
+              <div class="dropdown-btn input-group flex-nowrap mb-3">
+                
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="container">
-            <div class="input-group flex-nowrap mb-3">
+          <div class="col-lg-3">
+            <div class="container">
+              <div class="input-group flex-nowrap mb-3">
 
-                <input type="text" class="form-control" placeholder="number of hours from now" aria-label="Text input with dropdown button">
+                  <input type="text" class="form-control" placeholder="number of hours from now" aria-label="Text input with dropdown button">
 
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3">
-          <div class="container">
-            <div class="input-group flex-nowrap mb-3">
-              <div class="input-group-prepend"></div>
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
-                <!-- use 
-                  @media (max-width: 500px) {
-                  .dropdown-menu{
-                        height:200px;
-                        overflow-y:auto;
+          <div class="col-lg-3">
+            <div class="container">
+              <div class="dropdown-btn input-group flex-nowrap mb-3">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
+                  <!-- use 
+                    @media (max-width: 500px) {
+                    .dropdown-menu{
+                          height:200px;
+                          overflow-y:auto;
+                      }
                     }
-                  }
-                for scrollable dropdown -->
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                  
-                </div>
+                  for scrollable dropdown -->
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                    
+                  </div>
               </div>
             </div>
           </div>
@@ -138,6 +139,7 @@
             <area target="" alt="Maine" title="Maine" href="me" coords="1865,65,1875,76,1895,65,1914,69,1928,126,1980,161,1934,193,1916,196,1907,223,1898,237,1879,258,1870,274,1838,182" shape="poly">
         </map>
       </div>
+    </div>
   </body>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

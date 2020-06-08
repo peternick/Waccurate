@@ -25,18 +25,33 @@
 }
 
 
-
+#super-container{
+    border: dashed;
+    border-color: mediumaquamarine;
+    padding: 0em;
+}
 #row1, #row2{
-    margin-left: 17vw;
+    margin-left: 1vw;
 }
 #row1{
     margin-top: 10vw;
 }
 #row2{
-    margin-top: 4vw;
+    margin-top: 3vw;
+}
+.input-label{
+    margin-right: 2em;
+    font-size: 1.4em;
+    border-right: solid gray;
+    border-width: 0.1em;
+    padding-right: 1em;
 }
 .btn{
-    margin-left: 2em;
+    background-color: rgb(153, 139, 58);
+    color: black;
+}
+.btn:hover{
+    background-color: red;
 }
 
 
@@ -48,4 +63,23 @@ img[src="media/pictures/Blank_US_map.png"]{
     border-radius: 4em;
     border-width: 1em;
     border-color: maroon;
+}
+
+body{
+    background-image: linear-gradient(to right, rgb(57, 50, 121), rgb(96, 86, 184), rgb(57, 50, 121));
+}
+.container .row{
+    border: dashed;
+    border-color: orangered;
+}
+#input-background{
+    position: absolute;
+    border: dashed;
+    border-color: paleturquoise;
+    top: 65em;
+    height: 12em;
+    width: 75vw;
+    left: 12vw;
+    background-color: rgb(39, 114, 226);
+    border-radius: 3em 0em;
 }
