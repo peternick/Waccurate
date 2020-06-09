@@ -56,9 +56,10 @@
 
 
 img[src="media/pictures/Blank_US_map.png"]{
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 5vw;
+    width: 1410px;
+    height: 700px;
+    margin-left: 5vw;
+    margin-top: 3vw;
     border: ridge;
     border-radius: 4em;
     border-width: 1em;
