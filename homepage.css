@@ -57,7 +57,7 @@
 
 img[src="media/pictures/Blank_US_map.png"]{
     width: 1410px;
-    height: 700px;
+    height: 705px;
     margin-left: 5vw;
     margin-top: 3vw;
     border: ridge;
@@ -65,7 +65,12 @@ img[src="media/pictures/Blank_US_map.png"]{
     border-width: 1em;
     border-color: maroon;
 }
-
+canvas{
+    position: absolute;
+    border: solid orange;
+    margin-left: 5vw;
+    margin-top: 3vw;
+}
 body{
     background-image: linear-gradient(to right, rgb(57, 50, 121), rgb(96, 86, 184), rgb(57, 50, 121));
 }
