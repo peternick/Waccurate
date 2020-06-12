@@ -5,7 +5,7 @@ var parsed_coords;
 var j = 0;
 for (ele of areas_arr){
     parsed_coords = parse_coords(areas_arr[j].coords)
-    state_coords_dict[areas_arr[j].id] = parsed_coords;
+    state_coords_dict[areas_arr[j].title] = parsed_coords;
     j++;
 }
 function parse_coords(coord_string){
@@ -19,6 +19,16 @@ function parse_coords(coord_string){
 }
 /*  draws the outline of a state */
 function state_hovered(state_area_ele){
+    state_area_ele.style.position = "absolute";
+    state_area_ele.style.width = "1410px"
+    state_area_ele.style.height = "705px"
+    state_area_ele.style.marginLeft = "3.4vw";
+    state_area_ele.style.marginTop = "2.3vw";
+    state_area_ele.style.zIndex = "20"
+    state_area_ele.style.display = "initial"
+
+}
+/*function state_hovered(state_area_ele){
     const canvas = document.querySelector('#map_canvas');
     canvas.style.display = "initial"
     const cxt = canvas.getContext('2d');
@@ -33,7 +43,7 @@ function state_hovered(state_area_ele){
     }
     cxt.lineTo(state_coords[0], state_coords[1]);
     cxt.stroke()
-}
+}*/
 
 
 /* used for seeing coordinates at location clicked */
