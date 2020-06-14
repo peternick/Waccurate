@@ -20,13 +20,16 @@ function parse_coords(coord_string){
 /*  draws the outline of a state */
 function state_hovered(state_area_ele){
     state_area_ele.style.position = "absolute";
-    state_area_ele.style.width = "1410px"
-    state_area_ele.style.height = "705px"
-    state_area_ele.style.marginLeft = "3.4vw";
-    state_area_ele.style.marginTop = "2.3vw";
+    state_area_ele.style.width = "1390px"
+    state_area_ele.style.height = "695px"
+    state_area_ele.style.marginLeft = "4.8vw";
+    state_area_ele.style.marginTop = "2.9vw";
     state_area_ele.style.zIndex = "20"
     state_area_ele.style.display = "initial"
 
+}
+function state_notHovered(state_area_ele){
+    state_area_ele.style.display = "none"
 }
 /*function state_hovered(state_area_ele){
     const canvas = document.querySelector('#map_canvas');
