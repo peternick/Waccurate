@@ -17,95 +17,122 @@
           Waccurate
         </h1>
         <h3 id="sub-description">
-          See how accurate Accuweather truly is in predicting future weather
+          See how accurate Accuweather truly is in predicting the weather
         </h3>
       </div>
-    <div id="input-background">
-    </div>
-      <div class="container">
-        <div class="row" id="row1">
-          <div class="col-lg-5">
-            <div class="container" id="temp-unit-toggle">
-              <div class="input-group flex-nowrap">
-                <p class="input-label" id="addon-wrapping">Temperature:</p>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary active rounded">
-                    <input type="checkbox" checked> Fahrenheit
-                  </label>
-                  <label class="btn btn-secondary active rounded">
-                    <input type="checkbox" checked> Celsius
-                  </label>
+      <div id="input-pane">
+          <div class="row" id="row1">
+            <div class="col-lg-3">
+              <div class="container input-widget flex-nowrap" id="temp-unit-toggle">
+                <div class="input-group flex-nowrap">
+                  <p class="input-label" id="addon-wrapping">Temperature:</p>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#fahrenheit-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="fahrenheit-checkbtn">
+                    <input class="form-check-input"  id="fahrenheit-checkbox" type="radio" name="temp-btn"checked>
+                    <label class="form-check-label" for="fahrenheit">
+                      Fahrenheit
+                    </label>
+                  </div>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#celsius-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="celsius-checkbtn">
+                    <input class="form-check-input"  id="celsius-checkbox" type="radio" name="temp-btn">
+                    <label class="form-check-label" for="celsius">
+                      Celsius
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="container input-widget flex-nowrap" id="weather-icons-toggle">
+                <div class="input-group flex-nowrap" id="weather-icons-group">
+                  <p class="input-label" id="addon-wrapping">Displayed map weather icons:</p>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#temperature-checkbtn'), document.querySelector('#weather-icons-group'))" id="temperature-checkbtn">
+                    <input class="form-check-input"  id="temp-checkbox" type="radio" name="weather-btn"checked>
+                    <label class="form-check-label" for="temp">
+                      Temperature
+                    </label>
+                  </div>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#weather-checkbtn'), document.querySelector('#weather-icons-group'))" id="weather-checkbtn">
+                    <input class="form-check-input"  id="weather-checkbox" type="radio" name="weather-btn">
+                    <label class="form-check-label" for="weather">
+                      Weather
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 input-widget flex-nowrap">
+              <div class="container input-widget" id="states-dropdown">
+                <div class="dropdown-btn input-group flex-nowrap mb-3">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
+                    <div class="dropdown-menu">
+                      <select size="4" id="mySelect" style="width:150px;color:#222350;">
+                        <option value="1" selected>Alabama</option>
+                        <option value="2">Connecticut</option>
+                        <option value="3">Delaware</option>
+                        <option value="4">Florida</option>
+                        <option value="5">Georgia</option>
+                        <option value="6">Indiana</option>
+                        <option value="7">Kentukcy</option>
+                        <option value="8">Maine</option>
+                        <option value="9">Massachusetts</option>
+                        <option value="10">Maryland</option>
+                        <option value="11">Mississippi</option>
+                        <option value="12">New York</option>
+                        <option value="13">New Jersey</option>
+                        <option value="14">New Hampshire</option>
+                        <option value="15">North Carolina</option>
+                        <option value="16">Ohio</option>
+                        <option value="17">Pennsylvania</option>
+                        <option value="18">Rhode Island</option>
+                        <option value="19">South Carolina</option>
+                        <option value="20">Tennessee</option>
+                        <option value="21">Virginia</option>
+                        <option value="22">West Virginia</option>
+                    </select>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled='true'>
+                    <button type="button" class="btn btn-success"> ok </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col lg-4">
-            <div class="container" id="weather-icons-toggle">
-              <div class="input-group flex-nowrap">
-                <p class="input-label" id="addon-wrapping">Displayed map weather icons:</p>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary active rounded">
-                    <input type="checkbox" checked> Temperature
-                  </label>
-                  <label class="btn btn-secondary active rounded">
-                    <input type="checkbox" checked> Weather
-                  </label>
+          <div class="row" id="row2">
+            <div class="col-lg-5">
+              <div class="container">
+                <div class="input-group flex-nowrap mb-3" id="time-units-group">
+                  <p class="input-label" id="hours-input-label">Unit time of accuracy:</p>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#days-checkbtn'), document.querySelector('#time-units-group'))" id="days-checkbtn">
+                    <input class="form-check-input"  id="days-checkbox" type="radio" name="time-btn">
+                    <label class="form-check-label" for="time">
+                      Days
+                    </label>
+                  </div>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#hours-checkbtn'), document.querySelector('#time-units-group'))" id="hours-checkbtn">
+                    <input class="form-check-input"  id="hours-checkbox" type="radio" name="time-btn">
+                    <label class="form-check-label" for="time">
+                      Hours
+                    </label>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="Number of hours from weather prediction">
+                  <button type="button" class="btn btn-success"> ok </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="container">
+                <div class="dropdown-btn input-group flex-nowrap mb-3">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Humidity</a>
+                      <a class="dropdown-item" href="#">Precipitation</a>
+                      <a class="dropdown-item" href="#">Cloud Cover</a>
+                      <a class="dropdown-item" href="#">Wind Speed</a>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled='true'>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row" id="row2">
-          <div class="col-lg-4">
-            <div class="container" id="states-dropdown">
-              <div class="dropdown-btn input-group flex-nowrap mb-3">
-                
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                  </div>
-                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="container">
-              <div class="input-group flex-nowrap mb-3">
-
-                  <input type="text" class="form-control" placeholder="number of hours from now" aria-label="Text input with dropdown button">
-
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="container">
-              <div class="dropdown-btn input-group flex-nowrap mb-3">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
-                  <!-- use 
-                    @media (max-width: 500px) {
-                    .dropdown-menu{
-                          height:200px;
-                          overflow-y:auto;
-                      }
-                    }
-                  for scrollable dropdown -->
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                    
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="map-container container-fluid">
         <!--<canvas width="1410" height="700" id="map_canvas"></canvas> -->
@@ -113,119 +140,132 @@
         <a name="map-loc"></a>
         <img src="media/pictures/states_imgs/overlays/Alabama-img.png"   usemap="#alabama-overlay" id="al-img" class="maps">
         <map name="alabama-overlay" id="alabama-img-map">
-          <area target="" alt="Alabama" id="Alabama" onmouseout="state_notHovered(document.querySelector('#al-img'))" href="#map-loc" coords="931,404,994,398,1020,456,1023,463,1020,475,1025,493,954,499,962,510,954,518,946,511,936,518,927,463,928,437" shape="poly">
+          <area target="" alt="Alabama" id="Alabama"  href="#map-loc" coords="931,404,994,398,1020,456,1023,463,1020,475,1025,493,954,499,962,510,954,518,946,511,936,518,927,463,928,437" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Mississippi-img.png"   usemap="#mississippi-overlay" id="ms-img" class="maps">
         <map name="mississippi-overlay" id="mississippi-img-map">
-          <area target="" alt="Mississippi" id="Mississippi" onmouseout="state_notHovered(document.querySelector('#ms-img'))" href="#map-loc" coords="858,478,851,430,862,412,872,408,927,406,930,521,915,519,907,519,891,506,846,510" shape="poly">
+          <area target="" alt="Mississippi" id="Mississippi"  href="#map-loc" coords="858,478,851,430,862,412,872,408,927,406,930,521,915,519,907,519,891,506,846,510" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Georgia-img.png"   usemap="#georgia-overlay" id="ge-img" class="maps">
         <map name="georgia-overlay" id="georgia-img-map">
-          <area target="" alt="georgia" id="Georgia" onmouseout="state_notHovered(document.querySelector('#ge-img'))" href="#map-loc" coords="995,398,1056,392,1055,399,1068,408,1084,419,1108,437,1130,453,1128,466,1119,485,1113,492,1105,500,1094,499,1028,499" shape="poly">
+          <area target="" alt="georgia" id="Georgia"  href="#map-loc" coords="995,398,1056,392,1055,399,1068,408,1084,419,1108,437,1130,453,1128,466,1119,485,1113,492,1105,500,1094,499,1028,499" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/North_Carolina-img.png"  usemap="#north_carolina-overlay" id="nc-img" class="maps">
         <map name="north_carolina-overlay" id="north_carolina-img-map">
-          <area target="" alt="north_carolina" id="North_Carolina" onmouseout="state_notHovered(document.querySelector('#nc-img'))" href="#map-loc" coords="1086,349,1232,330,1241,337,1224,344,1248,347,1241,362,1227,368,1236,372,1208,392,1198,400,1187,404,1151,386,1121,389,1104,381,1072,388,1049,392,1030,391,1077,365" shape="poly">
+          <area target="" alt="north_carolina" id="North_Carolina"  href="#map-loc" coords="1086,349,1232,330,1241,337,1224,344,1248,347,1241,362,1227,368,1236,372,1208,392,1198,400,1187,404,1151,386,1121,389,1104,381,1072,388,1049,392,1030,391,1077,365" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/South_Carolina-img.png"  usemap="#south_carolina-overlay" id="sc-img" class="maps">
         <map name="south_carolina-overlay" id="south_carolina-img-map">
-          <area target="" alt="south_carolina" id="South_Carolina" onmouseout="state_notHovered(document.querySelector('#sc-img'))" href="#map-loc" coords="1067,389,1106,382,1126,386,1154,389,1182,399,1187,410,1167,427,1151,445,1133,455,1103,425,1078,411,1059,399" shape="poly">
+          <area target="" alt="south_carolina" id="South_Carolina"  href="#map-loc" coords="1067,389,1106,382,1126,386,1154,389,1182,399,1187,410,1167,427,1151,445,1133,455,1103,425,1078,411,1059,399" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Florida-img.png"  usemap="#florida-overlay" id="fl-img" class="maps">
         <map name="florida-overlay" id="florida-img-map">
-          <area target="" alt="florida" id="Florida" onmouseout="state_notHovered(document.querySelector('#fl-img'))" href="#map-loc" coords="1001,514,964,515,959,502,989,500,1027,494,1030,502,1107,500,1117,491,1130,497,1140,521,1188,582,1188,611,1180,628,1147,606,1104,566,1100,537,1051,518,1025,527" shape="poly">
+          <area target="" alt="florida" id="Florida"  href="#map-loc" coords="1001,514,964,515,959,502,989,500,1027,494,1030,502,1107,500,1117,491,1130,497,1140,521,1188,582,1188,611,1180,628,1147,606,1104,566,1100,537,1051,518,1025,527" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Kentucky-img.png"  usemap="#kentucky-overlay" id="ky-img" class="maps">
         <map name="kentucky-overlay" id="kentucky-img-map">
-          <area target="" alt="kentucky" id="Kentucky" onmouseout="state_notHovered(document.querySelector('#ky-img'))" href="#map-loc" coords="902,353,917,352,917,346,927,339,939,330,957,327,980,323,993,309,1005,299,1021,304,1044,306,1054,311,1065,320,1070,327,1053,342,1044,350,1010,353,930,361,904,367,897,358" shape="poly">
+          <area target="" alt="kentucky" id="Kentucky"  href="#map-loc" coords="902,353,917,352,917,346,927,339,939,330,957,327,980,323,993,309,1005,299,1021,304,1044,306,1054,311,1065,320,1070,327,1053,342,1044,350,1010,353,930,361,904,367,897,358" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Tennessee-img.png"  usemap="#tennessee-overlay" id="tn-img" class="maps">
         <map name="tennessee-overlay" id="tennessee-img-map">
-          <area target="" alt="tennessee" id="Tennessee" onmouseout="state_notHovered(document.querySelector('#tn-img'))" href="#map-loc" coords="890,370,927,368,959,362,1079,351,1075,357,1063,366,1051,372,1037,377,1026,394,997,396,876,404" shape="poly">
+          <area target="" alt="tennessee" id="Tennessee"  href="#map-loc" coords="890,370,927,368,959,362,1079,351,1075,357,1063,366,1051,372,1037,377,1026,394,997,396,876,404" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Virginia-img.png"  usemap="#virginia-overlay" id="va-img" class="maps">
         <map name="virginia-overlay" id="virginia-img-map">
-          <area target="" alt="virginia" id="Virginia" onmouseout="state_notHovered(document.querySelector('#va-img'))" href="#map-loc" coords="1048,352,1072,335,1105,331,1123,318,1132,300,1159,275,1186,273,1192,285,1215,294,1224,317,1233,330,1164,340,1114,346" shape="poly">
+          <area target="" alt="virginia" id="Virginia"  href="#map-loc" coords="1129, 351, 1054, 354, 1070, 337, 1088, 335, 1114, 330, 1125, 322, 1129, 307, 1141, 299, 1153, 285, 1165, 273, 1185, 282, 1198, 295, 1216, 300, 1223, 315, 1231, 327, 1196, 337, 1169, 343, 1138, 349, 1126, 348" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Maryland-img.png"  usemap="#maryland-overlay" id="md-img" class="maps">
         <map name="maryland-overlay" id="maryland-img-map">
-          <area target="" alt="maryland" id="Maryland" onmouseout="state_notHovered(document.querySelector('#md-img'))" href="#map-loc" coords="1217,290,1198,289,1196,278,1184,271,1175,266,1159,259,1212,252,1224,266,1230,282,1251,282,1238,294,1233,311" shape="poly">
+          <area target="" alt="maryland" id="Maryland"  href="#map-loc" coords="1205, 300, 1196, 294, 1192, 281, 1178, 283, 1173, 276, 1165, 279, 1154, 278, 1133, 280, 1129, 269, 1141, 265, 1153, 265, 1168, 265, 1199, 261, 1213, 260, 1220, 262, 1226, 276, 1234, 288, 1238, 290, 1243, 292, 1242, 296, 1244, 312, 1232, 316, 1227, 298, 1221, 286, 1220, 285, 1217, 287, 1211, 295" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Indiana-img.png"  usemap="#indiana-overlay" id="ia-img" class="maps">
         <map name="indiana-overlay" id="indiana-img-map">
-          <area target="" alt="indiana" id="Indiana" onmouseout="state_notHovered(document.querySelector('#ia-img'))" href="#map-loc" coords="925,332,928,320,931,305,931,297,923,239,946,236,983,232,995,302,986,310,972,321,952,327" shape="poly">
+          <area target="" alt="indiana" id="Indiana"  href="#map-loc" coords="925,332,928,320,931,305,931,297,923,239,946,236,983,232,995,302,986,310,972,321,952,327" shape="poly">
         </map>
-        <img src="media/pictures/states_imgs/overlays/Ohio-img.png"  usemap="#ohio-overlay" id="oh-img" class="maps">
+        <img src="media/pictures/states_imgs/overlays/Ohio-img.png"  usemap, document.querySelector('#')="#ohio-overlay" id="oh-img" class="maps">
         <map name="ohio-overlay" id="ohio-img-map">
-          <area target="" alt="ohio" id="Ohio" onmouseout="state_notHovered(document.querySelector('#oh-img'))" href="#map-loc" coords="1014,299,1000,295,990,232,1018,228,1044,232,1065,229,1086,213,1096,252,1088,281,1063,297,1062,307,1040,301" shape="poly">
+          <area target="" alt="ohio" id="Ohio"  href="#map-loc" coords="1014,299,1000,295,990,232,1018,228,1044,232,1065,229,1086,213,1096,252,1088,281,1063,297,1062,307,1040,301" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/West_Virginia-img.png"  usemap="#west_virginia-overlay" id="wv-img" class="maps">
         <map name="west_virginia-overlay" id="west_virginia-img-map">
-          <area target="" alt="west_virginia" id="West_Virginia" onmouseout="state_notHovered(document.querySelector('#wv-img'))" href="#map-loc" coords="1063,311,1069,303,1075,287,1085,276,1100,255,1105,267,1130,267,1132,273,1148,268,1167,262,1173,271,1156,279,1141,288,1137,294,1128,304,1124,312,1119,321,1106,328,1077,331" shape="poly">
+          <area target="" alt="west_virginia" id="West_Virginia"  href="#map-loc" coords="1063,311,1069,303,1075,287,1085,276,1100,255,1105,267,1130,267,1132,273,1148,268,1167,262,1173,271,1156,279,1141,288,1137,294,1128,304,1124,312,1119,321,1106,328,1077,331" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Delaware-img.png"  usemap="#delaware-overlay" id="de-img" class="maps">
         <map name="delaware-overlay" id="delaware-img-map">
-          <area target="" alt="delaware" id="Delaware" onmouseout="state_notHovered(document.querySelector('#de-img'))" href="#map-loc" coords="1217,252,1229,278,1246,277,1228,257" shape="poly">
+          <area target="" alt="delaware" id="Delaware"  href="#map-loc" coords="1248, 286, 1226, 288, 1207, 258, 1229, 256" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/New_York-img.png"  usemap="#new_york-overlay" id="ny-img" class="maps">
         <map name="new_york-overlay" id="new_york-img-map">
-          <area target="" alt="new_york" id="New_York" onmouseout="state_notHovered(document.querySelector('#ny-img'))" href="#map-loc" coords="1217,252,1229,278,1246,277,1228,257" shape="poly">
+          <area target="" alt="new_york" id="New_York"  href="#map-loc" coords="1209,199,1104,213,1121,193,1118,179,1161,175,1176,165,1173,154,1193,129,1231,118,1240,150,1248,165,1248,199,1250,208,1252,210,1224,204" shape="poly">
+        </map>
+        <img src="media/pictures/states_imgs/overlays/Pennsylvania-img.png"  usemap="#pennsylvania-overlay" id="pa-img" class="maps">
+        <map name="pennsylvania-overlay" id="pennsylvania-img-map">
+          <area target="" alt="pennsylvania" id="Pennsylvania"  href="#map-loc" coords="1096, 250, 1091, 231, 1085, 224, 1112, 222, 1166, 217, 1212, 211, 1222, 220, 1225, 228, 1222, 238, 1240, 245, 1228, 256, 1195, 265, 1107, 277, 1100, 269" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/New_Jersey-img.png"  usemap="#new_jersey-overlay" id="nj-img" class="maps">
         <map name="new_jersey-overlay" id="new_jersey-img-map">
-          <area target="" alt="new_jersey" id="New_Jersey" onmouseout="state_notHovered(document.querySelector('#nj-img'))" href="#map-loc" coords="1247,209,1233,207,1228,216,1230,227,1238,237,1228,247,1230,254,1238,259,1250,258,1261,242,1259,226" shape="poly">
+          <area target="" alt="new_jersey" id="New_Jersey"  href="#map-loc" coords="1229, 221, 1261, 219, 1252, 232, 1252, 241, 1261, 247, 1260, 261, 1257, 272, 1242, 272, 1227, 266, 1228, 255, 1233, 246, 1229, 241, 1224, 230" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Connecticut-img.png" usemap="#connecticut-overlay" id="ct-img" class="maps">
         <map name="connecticut-overlay" id="connecticut-img-map">
-          <area target="" alt="connecticut" id="Connecticut" onmouseout="state_notHovered(document.querySelector('#ct-img'))" href="#map-loc" coords="1257,213,1256,189,1290,184,1295,197,1280,205" shape="poly">
+          <area target="" alt="connecticut" id="Connecticut"  href="#map-loc" coords="1257, 226, 1257, 196, 1293, 188, 1298, 208, 1283, 216" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Massachusetts-img.png" usemap="#massachusetts-overlay" id="ma-img" class="maps">
         <map name="massachusetts-overlay" id="massachusetts-img-map">
-          <area target="" alt="massachusetts" id="Massachusetts" onmouseout="state_notHovered(document.querySelector('#ma-img'))" href="#map-loc" coords="1252,172,1300,164,1306,159,1312,164,1311,173,1322,179,1330,175,1317,189,1307,191,1300,183,1252,188" shape="poly">
+          <area target="" alt="massachusetts" id="Massachusetts"  href="#map-loc" coords="1248, 176, 1297, 165, 1313, 165, 1326, 177, 1326, 191, 1305, 185, 1280, 191, 1257, 199, 1255, 186" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Rhode_Island-img.png" usemap="#rhode_island-overlay" id="ri-img" class="maps">
         <map name="rhode_island-overlay" id="rhode_island-img-map">
-          <area target="" alt="rhode_island" id="Rhode_Island" onmouseout="state_notHovered(document.querySelector('#ri-img'))" href="#map-loc" coords="1296,204,1290,184,1308,185,1306,189" shape="poly">
+          <area target="" alt="rhode_island" id="Rhode_Island"  href="#map-loc" coords="1293, 187, 1308, 187, 1308, 203, 1292, 205" shape="poly">
         </map>
-        <img src="media/pictures/states_imgs/overlays/Vermont-img.png" usemap="#vermont-overlay" id="ri-img" class="maps">
+        <img src="media/pictures/states_imgs/overlays/Vermont-img.png" usemap="#vermont-overlay" id="vt-img" class="maps">
         <map name="vermont-overlay" id="Vermont-img-map">
-          <area target="" alt="vermont" id="Vermont" onmouseout="state_notHovered(document.querySelector('#vt-img'))" href="#map-loc" coords="1232,118,1271,109,1270,123,1267,131,1266,147,1270,169,1271,163,1252,169" shape="poly">
+          <area target="" alt="vermont" id="Vermont"  href="#map-loc" coords="1247, 172, 1233, 130, 1253, 125, 1275, 124, 1267, 157, 1267, 171, 1259, 182" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/Maine-img.png" usemap="#maine-overlay" id="me-img" class="maps">
         <map name="maine-overlay" id="Maine-img-map">
-          <area target="" alt="maine" id="maine" onmouseout="state_notHovered(document.querySelector('#me-img'))" href="#map-loc" coords="1300,34,1308,40,1322,34,1335,36,1345,66,1380,85,1350,101,1335,103,1330,117,1323,124,1310,135,1304,144,1282,96" shape="poly">
+          <area target="" alt="maine" id="maine"  href="#map-loc" coords="1306, 157, 1286, 112, 1288, 103, 1291, 90, 1291, 76, 1298, 60, 1302, 54, 1314, 57, 1326, 54, 1332, 58, 1340, 69, 1345, 78, 1350, 86, 1356, 88, 1365, 97, 1368, 98, 1376, 102, 1376, 108, 1367, 113, 1361, 118, 1353, 118, 1346, 120, 1340, 119, 1334, 130, 1335, 137, 1325, 141, 1318, 145, 1315, 157" shape="poly">
+        </map>
+        <img src="media/pictures/states_imgs/overlays/New_Hampshire-img.png" usemap="#new_hampshire-overlay" id="nh-img" class="maps">
+        <map name="new_hampshire-overlay" id="New_Hampshire-img-map">
+          <area target="" alt="new_hampshire" id="new_hampshire"  href="#map-loc" coords="1268, 157, 1272, 139, 1276, 123, 1286, 114, 1298, 134, 1309, 149, 1312, 158, 1312, 174, 1284, 177, 1271, 175" shape="poly">
         </map>
         <img src="media/pictures/Blank_US_map.png" usemap="#background-map" id="background-map-id">
         <map name="background-map">
-          <area target="" alt="Mississippi" onmouseover="state_hovered(document.querySelector('#ms-img'))" title="Mississippi" id="Mississippi-bg" href="#map-loc" coords="858,478,851,430,862,412,872,408,927,406,930,521,915,519,907,519,891,506,846,510" shape="poly">
-          <area target="" alt="Alabama" onmouseover="state_hovered(document.querySelector('#al-img'))" title="Alabama" id="Alabama-bg" href="#map-loc" coords="931,404,994,398,1020,456,1023,463,1020,475,1025,493,954,499,962,510,954,518,946,511,936,518,927,463,928,437" shape="poly">
-          <area target="" alt="Georgia" onmouseover="state_hovered(document.querySelector('#ge-img'))" title="Georgia" id="Georgia-bg" href="#map-loc" coords="995,398,1056,392,1055,399,1068,408,1084,419,1108,437,1130,453,1128,466,1119,485,1113,492,1105,500,1094,499,1028,499" shape="poly">
-          <area target="" alt="Florida" onmouseover="state_hovered(document.querySelector('#fl-img'))" title="Florida" id="Florida-bg" href="#map-loc" coords="1001,514,964,515,959,502,989,500,1027,494,1030,502,1107,500,1117,491,1130,497,1140,521,1188,582,1188,611,1180,628,1147,606,1104,566,1100,537,1051,518,1025,527" shape="poly">
-          <area target="" alt="South Carolina" onmouseover="state_hovered(document.querySelector('#sc-img'))" title="South Carolina" id="South Carolina-bg" href="#map-loc" coords="1067,389,1106,382,1126,386,1154,389,1182,399,1187,410,1167,427,1151,445,1133,455,1103,425,1078,411,1059,399" shape="poly">
-          <area target="" alt="North Carolina" onmouseover="state_hovered(document.querySelector('#nc-img'))" title="North Carolina" id="North Carolina-bg" href="#map-loc" coords="1086,349,1232,330,1241,337,1224,344,1248,347,1241,362,1227,368,1236,372,1208,392,1198,400,1187,404,1151,386,1121,389,1104,381,1072,388,1049,392,1030,391,1077,365" shape="poly">
-          <area target="" alt="Virginia" onmouseover="state_hovered(document.querySelector('#va-img'))" title="Virginia" id="Virginia-bg" href="#map-loc" coords="1048,352,1072,335,1105,331,1123,318,1132,300,1159,275,1186,273,1192,285,1215,294,1224,317,1233,330,1164,340,1114,346" shape="poly">
-          <area target="" alt="Maryland" onmouseover="state_hovered(document.querySelector('#md-img'))" title="Maryland" id="Maryland-bg" href="#map-loc" coords="1217,290,1198,289,1196,278,1184,271,1175,266,1159,259,1212,252,1224,266,1230,282,1251,282,1238,294,1233,311" shape="poly">
-          <area target="" alt="Pennsylvania" onmouseover="state_hovered(document.querySelector('#pa-img'))" title="Pennsylvania" id="Pennsylvania-bg" href="#map-loc" coords="1089,210,1105,207,1106,214,1142,212,1212,205,1227,206,1222,217,1230,229,1230,242,1219,254,1104,270" shape="poly">
-          <area target="" alt="West Virginia" onmouseover="state_hovered(document.querySelector('#wv-img'))" title="West Virginia" id="West Virginia-bg" href="#map-loc" coords="1063,311,1069,303,1075,287,1085,276,1100,255,1105,267,1130,267,1132,273,1148,268,1167,262,1173,271,1156,279,1141,288,1137,294,1128,304,1124,312,1119,321,1106,328,1077,331" shape="poly">
-          <area target="" alt="Ohio" onmouseover="state_hovered(document.querySelector('#oh-img'))" title="Ohio" id="Ohio-bg" href="#map-loc" coords="1014,299,1000,295,990,232,1018,228,1044,232,1065,229,1086,213,1096,252,1088,281,1063,297,1062,307,1040,301" shape="poly">
-          <area target="" alt="Kentucky" onmouseover="state_hovered(document.querySelector('#ky-img'))" title="Kentucky" id="Kentucky-bg" href="#map-loc" coords="902,353,917,352,917,346,927,339,939,330,957,327,980,323,993,309,1005,299,1021,304,1044,306,1054,311,1065,320,1070,327,1053,342,1044,350,1010,353,930,361,904,367,897,358" shape="poly">
-          <area target="" alt="Tenesse" onmouseover="state_hovered(document.querySelector('#tn-img'))" title="Louisiana" id="Tenesse-bg" href="#map-loc" coords="890,370,927,368,959,362,1079,351,1075,357,1063,366,1051,372,1037,377,1026,394,997,396,876,404" shape="poly">
-          <area target="" alt="Indianna" onmouseover="state_hovered(document.querySelector('#ia-img'))" title="Indianna" id="Indianna-bg" href="#map-loc" coords="925,332,928,320,931,305,931,297,923,239,946,236,983,232,995,302,986,310,972,321,952,327" shape="poly">
-          <area target="" alt="disabled" onmouseover="state_hovered(document.querySelector('#disabled'))" title="disabled" id="disabled-bg" href="disab#map-loc" coords="776,541,719,569,678,593,678,640,627,615,585,557,548,538,514,557,472,528,421,486,383,483,367,492,267,467,200,440,150,433,112,396,65,366,46,329,28,267,19,226,31,176,36,151,59,106,88,67,86,18,117,32,132,25,132,8,291,36,406,54,503,60,598,64,733,64,772,79,804,85,832,85,850,88,806,116,824,119,861,111,885,112,932,114,959,110,976,117,983,124,940,158,935,195,946,219,930,237,920,250,925,317,909,347,867,400,844,450,841,458,770,459,781,510" shape="poly">
-          <area target="" alt="Delaware" onmouseover="state_hovered(document.querySelector('#de-img'))" title="Delaware" id="Delaware-bg" href="#map-loc" coords="1217,252,1229,278,1246,277,1228,257" shape="poly">
-          <area target="" alt="New Jersey" onmouseover="state_hovered(document.querySelector('#nj-img'))" title="New Jersey" id="New Jersey-bg" href="#map-loc" coords="1247,209,1233,207,1228,216,1230,227,1238,237,1228,247,1230,254,1238,259,1250,258,1261,242,1259,226" shape="poly">
-          <area target="" alt="New York" onmouseover="state_hovered(document.querySelector('#ny-img'))" title="New York" id="New York-bg" href="#map-loc" coords="1209,199,1104,213,1121,193,1118,179,1161,175,1176,165,1173,154,1193,129,1231,118,1240,150,1248,165,1248,199,1250,208,1252,210,1224,204" shape="poly">
-          <area target="" alt="Connecticut" onmouseover="state_hovered(document.querySelector('#ct-img'))" title="Connecticut" id="Connecticut-bg" href="#map-loc" coords="1257,213,1256,189,1290,184,1295,197,1280,205" shape="poly">
-          <area target="" alt="Rhode Island" onmouseover="state_hovered(document.querySelector('#ri-img'))" title="Rhode Island" id="Rhode Island-bg" href="#map-loc" coords="1296,204,1290,184,1308,185,1306,189" shape="poly">
-          <area target="" alt="Massachusetts" onmouseover="state_hovered(document.querySelector('#ma-img'))" title="Massachusetts" id="Massachusetts-bg" href="#map-loc" coords="1252,172,1300,164,1306,159,1312,164,1311,173,1322,179,1330,175,1317,189,1307,191,1300,183,1252,188" shape="poly">
-          <area target="" alt="Vermont" onmouseover="state_hovered(document.querySelector('#vt-img'))" title="Vermont" id="Vermont-bg" href="#map-loc" coords="1232,118,1271,109,1270,123,1267,131,1266,147,1270,169,1271,163,1252,169" shape="poly">
-          <area target="" alt="New Hampshire" onmouseover="state_hovered(document.querySelector('#nh-img'))" title="New Hampshire" id="New Hampshire-bg" href="#map-loc" coords="1281,103,1304,154,1292,159,1273,166,1270,129,1273,107" shape="poly">
-          <area target="" alt="Maine" onmouseover="state_hovered(document.querySelector('#me-img'))" title="Maine" id="Maine-bg" href="#map-loc" coords="1300,34,1308,40,1322,34,1335,36,1345,66,1380,85,1350,101,1335,103,1330,117,1323,124,1310,135,1304,144,1282,96" shape="poly">
+          <area target="" alt="Mississippi" onmouseenter="state_hovered(document.querySelector('#ms-img'), document.querySelector('#Mississippi'))" title="Mississippi" id="Mississippi-bg" href="#map-loc" coords="858,478,851,430,862,412,872,408,927,406,930,521,915,519,907,519,891,506,846,510" shape="poly">
+          <area target="" alt="Alabama" onmouseenter="state_hovered(document.querySelector('#al-img'), document.querySelector('#Alabama'))" title="Alabama" id="Alabama-bg" href="#map-loc" coords="947, 504, 935, 497, 931, 503, 929, 403, 987, 400, 1006, 451, 1012, 459, 1012, 479, 1016, 488, 947, 491" shape="poly">
+          <area target="" alt="Georgia" onmouseenter="state_hovered(document.querySelector('#ge-img'), document.querySelector('#Georgia'))" title="Georgia" id="Georgia-bg" href="#map-loc" coords="1031, 494, 1022, 470, 1024, 451, 1014, 436, 998, 400, 1047, 395, 1072, 409, 1092, 424, 1114, 440, 1127, 456, 1120, 473, 1115, 482, 1090, 488, 1055, 493" shape="poly">
+          <area target="" alt="Florida" onmouseenter="state_hovered(document.querySelector('#fl-img'), document.querySelector('#Florida'))" title="Florida" id="Florida-bg" href="#map-loc" coords="961, 500, 1019, 497, 1037, 502, 1096, 499, 1125, 500, 1139, 521, 1156, 545, 1171, 563, 1181, 579, 1185, 600, 1182, 607, 1176, 616, 1148, 598, 1122, 574, 1111, 553, 1108, 535, 1096, 521, 1069, 509, 1053, 507, 1029, 516, 1004, 507, 972, 506" shape="poly">
+          <area target="" alt="South Carolina" onmouseenter="state_hovered(document.querySelector('#sc-img'), document.querySelector('#South_Carolina'))" title="South Carolina" id="South Carolina-bg" href="#map-loc" coords="1104, 418, 1079, 409, 1066, 397, 1092, 391, 1116, 395, 1147, 393, 1158, 398, 1170, 400, 1171, 410, 1158, 422, 1153, 431, 1135, 439, 1127, 437, 1110, 423, 1089, 411" shape="poly">
+          <area target="" alt="North Carolina" onmouseenter="state_hovered(document.querySelector('#nc-img'), document.querySelector('#North_Carolina'))" title="North Carolina" id="North Carolina-bg" href="#map-loc" coords="1190, 399, 1155, 384, 1127, 380, 1093, 378, 1059, 385, 1039, 388, 1064, 371, 1089, 360, 1143, 351, 1185, 345, 1208, 340, 1226, 337, 1229, 338, 1223, 360, 1219, 371, 1208, 383" shape="poly">
+          <area target="" alt="Virginia" onmouseenter="state_hovered(document.querySelector('#va-img'), document.querySelector('#Virginia'))" title="Virginia" id="Virginia-bg" href="#map-loc" coords="1100, 344, 1068, 346, 1081, 338, 1095, 337, 1124, 331, 1138, 324, 1138, 310, 1148, 299, 1163, 285, 1172, 278, 1187, 289, 1197, 303, 1210, 307, 1214, 318, 1218, 327, 1198, 331, 1175, 336, 1150, 337, 1121, 342" shape="poly">
+          <area target="" alt="Maryland" onmouseenter="state_hovered(document.querySelector('#md-img'), document.querySelector('#Maryland'))" title="Maryland" id="Maryland-bg" href="#map-loc" coords="1196, 291, 1189, 283, 1182, 273, 1169, 272, 1164, 267, 1155, 267, 1145, 270, 1123, 277, 1123, 271, 1130, 268, 1143, 267, 1158, 265, 1191, 263, 1203, 263, 1208, 262, 1214, 274, 1221, 287, 1225, 290, 1228, 293, 1229, 298, 1227, 304, 1222, 309, 1218, 304, 1215, 305, 1209, 298, 1207, 292, 1200, 291" shape="poly">
+          <area target="" alt="Pennsylvania" onmouseenter="state_hovered(document.querySelector('#pa-img'), document.querySelector('#Pennsylvania'))" title="Pennsylvania" id="Pennsylvania-bg" href="#map-loc" coords="1104, 263, 1095, 225, 1091, 218, 1112, 221, 1166, 214, 1208, 208, 1216, 214, 1219, 225, 1215, 235, 1225, 237, 1223, 246, 1193, 254, 1106, 267, 1105, 263" shape="poly">
+          <area target="" alt="West Virginia" onmouseenter="state_hovered(document.querySelector('#wv-img'), document.querySelector('#West_Virginia'))" title="West Virginia" id="West Virginia-bg" href="#map-loc" coords="1063, 308, 1075, 292, 1086, 283, 1100, 275, 1106, 280, 1117, 285, 1121, 289, 1140, 273, 1140, 287, 1134, 297, 1123, 297, 1116, 307, 1112, 314, 1099, 319, 1082, 328, 1071, 324, 1063, 312, 1063, 309, 1062, 309" shape="poly">
+          <area target="" alt="Ohio" onmouseenter="state_hovered(document.querySelector('#oh-img'), document.querySelector('#Ohio'))" title="Ohio" id="Ohio-bg" href="#map-loc" coords="1034, 302, 1007, 294, 996, 277, 990, 244, 1025, 242, 1059, 242, 1071, 239, 1077, 236, 1084, 237, 1086, 249, 1086, 261, 1081, 278, 1072, 288, 1057, 301, 1049, 304" shape="poly">
+          <area target="" alt="Kentucky" onmouseenter="state_hovered(document.querySelector('#ky-img'), document.querySelector('#Kentucky'))" title="Kentucky" id="Kentucky-bg" href="#map-loc" coords="1024, 349, 1010, 353, 960, 355, 922, 360, 910, 367, 895, 368, 910, 358, 918, 350, 937, 345, 957, 339, 977, 330, 991, 322, 1009, 310, 1034, 312, 1046, 312, 1052, 319, 1059, 333, 1057, 340, 1044, 347, 1033, 348" shape="poly">
+          <area target="" alt="Tenesse" onmouseenter="state_hovered(document.querySelector('#tn-img'), document.querySelector('#Tennessee'))" title="Tennessee" id="Tenesse-bg" href="#map-loc" coords="878, 401, 884, 379, 955, 371, 1052, 361, 1066, 359, 1042, 374, 1014, 389, 1006, 393" shape="poly">
+          <area target="" alt="Indianna" onmouseenter="state_hovered(document.querySelector('#ia-img'), document.querySelector('#Indianna'))" title="Indianna" id="Indianna-bg" href="#map-loc" coords="984, 303, 963, 315, 941, 328, 932, 328, 927, 322, 933, 307, 930, 289, 929, 273, 926, 253, 941, 246, 967, 243, 976, 241, 982, 251, 983, 270, 986, 286, 987, 296" shape="poly">
+          <area target="" alt="disabled" onmouseenter="state_hovered(document.querySelector('#disabled'), document.querySelector('#disabled'))" title="disabled" id="disabled-bg" href="disab#map-loc" coords="776,541,719,569,678,593,678,640,627,615,585,557,548,538,514,557,472,528,421,486,383,483,367,492,267,467,200,440,150,433,112,396,65,366,46,329,28,267,19,226,31,176,36,151,59,106,88,67,86,18,117,32,132,25,132,8,291,36,406,54,503,60,598,64,733,64,772,79,804,85,832,85,850,88,806,116,824,119,861,111,885,112,932,114,959,110,976,117,983,124,940,158,935,195,946,219,930,237,920,250,925,317,909,347,867,400,844,450,841,458,770,459,781,510" shape="poly">
+          <area target="" alt="Delaware" onmouseenter="state_hovered(document.querySelector('#de-img'), document.querySelector('#Delaware'))" title="Delaware" id="Delaware-bg" href="#map-loc" coords="1242, 284, 1228, 284, 1216, 260, 1225, 266" shape="poly">
+          <area target="" alt="New Jersey" onmouseenter="state_hovered(document.querySelector('#nj-img'), document.querySelector('#New_Jersey'))" title="New Jersey" id="New Jersey-bg" href="#map-loc" coords="1230, 220, 1248, 224, 1242, 234, 1248, 239, 1252, 245, 1249, 257, 1247, 264, 1234, 262, 1232, 255, 1236, 248, 1237, 240, 1232, 235, 1228, 229" shape="poly">
+          <area target="" alt="New York" onmouseenter="state_hovered(document.querySelector('#ny-img'), document.querySelector('#Maine'))" title="New York" id="New York-bg" href="#map-loc" coords="1239, 208, 1210, 199, 1181, 205, 1141, 208, 1111, 213, 1127, 202, 1127, 192, 1146, 188, 1172, 187, 1186, 164, 1190, 146, 1207, 131, 1230, 130, 1238, 151, 1242, 172, 1243, 184, 1245, 199, 1246, 208" shape="poly">
+          <area target="" alt="Connecticut" onmouseenter="state_hovered(document.querySelector('#ct-img'), document.querySelector('#Maine'))" title="Connecticut" id="Connecticut-bg" href="#map-loc" coords="1259, 214, 1258, 198, 1287, 194, 1291, 203, 1281, 206" shape="poly">
+          <area target="" alt="Rhode Island" onmouseenter="state_hovered(document.querySelector('#ri-img'), document.querySelector('#Maine'))" title="Rhode Island" id="Rhode Island-bg" href="#map-loc" coords="1293, 192, 1300, 191, 1307, 202, 1298, 203" shape="poly">
+          <area target="" alt="Massachusetts" onmouseenter="state_hovered(document.querySelector('#ma-img'), document.querySelector('#Maine'))" title="Massachusetts" id="Massachusetts-bg" href="#map-loc" coords="1251, 181, 1293, 173, 1306, 172, 1307, 182, 1315, 189, 1298, 184, 1272, 188, 1255, 191, 1253, 187" shape="poly">
+          <area target="" alt="Vermont" onmouseenter="state_hovered(document.querySelector('#vt-img'), document.querySelector('#Maine'))" title="Vermont" id="Vermont-bg" href="#map-loc" coords="1253, 164, 1238, 129, 1254, 126, 1265, 121, 1263, 150, 1261, 162, 1260, 171" shape="poly">
+          <area target="" alt="New Hampshire" onmouseenter="state_hovered(document.querySelector('#nh-img'), document.querySelector('#Maine'))" title="New Hampshire" id="New Hampshire-bg" href="#map-loc" coords="1270, 153, 1273, 133, 1279, 121, 1276, 111, 1286, 134, 1291, 147, 1296, 156, 1300, 161, 1277, 164, 1271, 165" shape="poly">
+          <area target="" alt="Maine" onmouseenter="state_hovered(document.querySelector('#me-img'), document.querySelector('#Maine'))" title="Maine" id="Maine-bg" href="#map-loc" coords="1302, 146, 1288, 116, 1294, 90, 1296, 67, 1316, 52, 1329, 57, 1341, 78, 1351, 93, 1360, 98, 1335, 108, 1316, 123, 1304, 136" shape="poly">
         </map>
       </div>
     </div>
   </body>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()})
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

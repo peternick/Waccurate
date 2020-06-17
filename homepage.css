@@ -1,8 +1,9 @@
-/*                      ****** tile bar *******   */
+/*                  *** title bar ***               */
 .title-bar{
     border: dashed;
     padding: 0em;
     overflow: hidden;
+    position: relative;
 }
 #title{
     position: absolute;
@@ -18,43 +19,92 @@
 }
 #sub-description{
     position: absolute;
-    top: 20em;
-    left: 20em;
-    color: yellow;
-    text-shadow: 2px 1px 1px darkblue;
+    top: 17em;
+    left: 15em;
+    color: rgb(241, 225, 153);
+    text-shadow: 0px 2px 1px darkblue, 2px 0px 1px darkblue, -2px 0px 1px darkblue, 0px -2px 1px darkblue;
 }
 
-
+/*                  *** container for whole body ***                */
 #super-container{
     border: dashed;
     border-color: mediumaquamarine;
     padding: 0em;
 }
+
+/*                  *** input ***                   */
+.container{
+    border: dashed;
+    border-color: blue;
+}
+
+#weather-icons-toggle{
+    margin: 0em;
+    margin-left: 1.5vw;
+    padding: 0em;
+    width: 34vw;
+}
+#weather-icons-toggle .input-group .form-check-inline{
+    width: 8vw;
+}
+#input-pane{
+    border: dashed;
+    border-color: red;
+    margin-top: 7vw;
+    width: 90vw;
+    margin-left: 5vw;
+    background-color: rgb(39, 114, 226);
+    border-radius: 3em 0em;
+}
 #row1, #row2{
     margin-left: 1vw;
 }
 #row1{
-    margin-top: 10vw;
+    margin-top: 2vw;
 }
 #row2{
     margin-top: 3vw;
 }
 .input-label{
-    margin-right: 2em;
-    font-size: 1.4em;
+    margin: auto 0em;
+    margin-right: 1em;
+    font-size: 1em;
     border-right: solid gray;
+    padding-bottom: 0.3vw;
     border-width: 0.1em;
     padding-right: 1em;
+}
+#hours-input-label .form-control{
+    width: 2em;
+}
+input[disabled='true']{
+    border: solid rgb(110, 110, 70);
 }
 .btn{
     background-color: rgb(153, 139, 58);
     color: black;
 }
+.btn-success{
+    background-color: rgb(66, 185, 36);
+    color: white;
+    margin-left: 0.3vw;
+}
 .btn:hover{
     background-color: red;
 }
+.form-check-inline{
+    border: solid dimgrey;
+    background-color: dimgray;
+    border-radius: 0.3em;
+    padding: 0.2em;
+    color: white;
+}
+.form-check-inline:hover{
+    background-color: red;
+    border-color: red;
+}
 
-
+/*                  *** map ***                 */
 #background-map-id{
     width: 1410px;
     height: 705px;
@@ -65,7 +115,6 @@
     border-width: 1em;
     border-color: maroon;
 }
-
 .maps{
     display:none;
 }
@@ -78,18 +127,5 @@
 body{
     background-image: linear-gradient(to right, rgb(57, 50, 121), rgb(96, 86, 184), rgb(57, 50, 121));
 }
-.container .row{
-    border: dashed;
-    border-color: orangered;
-}
-#input-background{
-    position: absolute;
-    border: dashed;
-    border-color: paleturquoise;
-    top: 65em;
-    height: 12em;
-    width: 75vw;
-    left: 12vw;
-    background-color: rgb(39, 114, 226);
-    border-radius: 3em 0em;
-}
+
+

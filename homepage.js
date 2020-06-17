@@ -1,3 +1,28 @@
+/*                  *** input area ***                  */
+function radio_btn_switch(checkbox, parent){
+    checkbox.addEventListener('click', click_check);
+    function click_check(){
+        for (box of parent.children){
+            if(box.getAttribute('class') == 'form-check-inline'){
+                for (ele of box.children){
+                    if (ele.getAttribute('class') == 'form-check-input'){
+                        ele.checked = false;
+                        box.style.borderColor = box.style.backgroundColor;
+                    }
+                }
+            }
+        }
+        for(ele of checkbox.children){
+            console.log(ele)
+            if(ele.getAttribute('class') == 'form-check-input'){
+                ele.checked = true;
+                checkbox.style.borderColor = "grey";
+            }
+        }
+    }
+ 
+}
+
 /* creates a dictionary of state:coord_arr values */
 var areas_arr = document.querySelectorAll('area');
 var state_coords_dict = {}
@@ -18,19 +43,27 @@ function parse_coords(coord_string){
     return coord_arr;
 }
 /*  draws the outline of a state */
-function state_hovered(state_area_ele){
-    state_area_ele.style.position = "absolute";
-    state_area_ele.style.width = "1390px"
-    state_area_ele.style.height = "695px"
-    state_area_ele.style.marginLeft = "4.8vw";
-    state_area_ele.style.marginTop = "2.9vw";
-    state_area_ele.style.zIndex = "20"
-    state_area_ele.style.display = "initial"
+function state_hovered(state_img, state_area){
+    state_img.style.position = "absolute";
+    state_img.style.width = "1390px"
+    state_img.style.height = "695px"
+    state_img.style.marginLeft = "4.8vw";
+    state_img.style.marginTop = "2.9vw";
+    state_img.style.zIndex = "20"
+    state_img.style.display = "initial"
+    $(state_area).hover(function(){
+        state_img.style.position = "absolute";
+        state_img.style.width = "1390px"
+        state_img.style.height = "695px"
+        state_img.style.marginLeft = "4.8vw";
+        state_img.style.marginTop = "2.9vw";
+        state_img.style.zIndex = "20";
+        state_img.style.display = "initial";
+    }, function(){
+        state_img.style.display = "none";
+    })
+}
 
-}
-function state_notHovered(state_area_ele){
-    state_area_ele.style.display = "none"
-}
 /*function state_hovered(state_area_ele){
     const canvas = document.querySelector('#map_canvas');
     canvas.style.display = "initial"
