@@ -60,9 +60,46 @@
                 </div>
               </div>
             </div>
+            <div class="col-lg-3">
+              <div class="container">
+                <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a weather statistic to show for the whole United States">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" title="What statistic to show for the whole United States" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Humidity</a>
+                      <a class="dropdown-item" href="#">Precipitation</a>
+                      <a class="dropdown-item" href="#">Cloud Cover</a>
+                      <a class="dropdown-item" href="#">Wind Speed</a>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled='true'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="row2">
+            <div class="col-lg-5">
+              <div class="container">
+                <div class="input-group flex-nowrap mb-3" id="time-units-group">
+                  <p class="input-label" id="hours-input-label">time until prediction:</p>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#days-checkbtn'), document.querySelector('#time-units-group'))" id="days-checkbtn">
+                    <input class="form-check-input"  id="days-checkbox" type="radio" name="time-btn">
+                    <label class="form-check-label" for="time">
+                      Days
+                    </label>
+                  </div>
+                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#hours-checkbtn'), document.querySelector('#time-units-group'))" id="hours-checkbtn">
+                    <input class="form-check-input"  id="hours-checkbox" type="radio" name="time-btn">
+                    <label class="form-check-label" for="time">
+                      Hours
+                    </label>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="number of hours from now until a certain point at which Accuweather makes a weather prediction">
+                  <button type="button" class="btn btn-success"> ok </button>
+                </div>
+              </div>
+            </div>
             <div class="col-lg-3 input-widget flex-nowrap">
               <div class="container input-widget" id="states-dropdown">
-                <div class="dropdown-btn input-group flex-nowrap mb-3">
+                <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a state to see specific statistics">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region</button>
                     <div class="dropdown-menu">
                       <select size="4" id="mySelect" style="width:150px;color:#222350;">
@@ -95,44 +132,19 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row" id="row2">
-            <div class="col-lg-5">
-              <div class="container">
+            <div class="col-lg-3 input-widget flex-nowrap">
+              <div class="container input-widget" id="margin-err">
                 <div class="input-group flex-nowrap mb-3" id="time-units-group">
-                  <p class="input-label" id="hours-input-label">Unit time of accuracy:</p>
-                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#days-checkbtn'), document.querySelector('#time-units-group'))" id="days-checkbtn">
-                    <input class="form-check-input"  id="days-checkbox" type="radio" name="time-btn">
-                    <label class="form-check-label" for="time">
-                      Days
-                    </label>
-                  </div>
-                  <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#hours-checkbtn'), document.querySelector('#time-units-group'))" id="hours-checkbtn">
-                    <input class="form-check-input"  id="hours-checkbox" type="radio" name="time-btn">
-                    <label class="form-check-label" for="time">
-                      Hours
-                    </label>
-                  </div>
-                  <input type="text" class="form-control" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="Number of hours from weather prediction">
+                  <p class="input-label" id="margin-err-label">percentage error:</p>
+                  <input type="text" class="form-control" aria-label="Text input with dropdown butto" data-toggle="tooltip" data-placement="top" title="number of hours ">
                   <button type="button" class="btn btn-success"> ok </button>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3">
-              <div class="container">
-                <div class="dropdown-btn input-group flex-nowrap mb-3">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Humidity</a>
-                      <a class="dropdown-item" href="#">Precipitation</a>
-                      <a class="dropdown-item" href="#">Cloud Cover</a>
-                      <a class="dropdown-item" href="#">Wind Speed</a>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled='true'>
-                </div>
-              </div>
-            </div>
           </div>
+      </div>
+      <div id="output-pane">
+        
       </div>
       <div class="map-container container-fluid">
         <!--<canvas width="1410" height="700" id="map_canvas"></canvas> -->
@@ -182,7 +194,7 @@
         <map name="indiana-overlay" id="indiana-img-map">
           <area target="" alt="indiana" id="Indiana"  href="#map-loc" coords="925,332,928,320,931,305,931,297,923,239,946,236,983,232,995,302,986,310,972,321,952,327" shape="poly">
         </map>
-        <img src="media/pictures/states_imgs/overlays/Ohio-img.png"  usemap, document.querySelector('#')="#ohio-overlay" id="oh-img" class="maps">
+        <img src="media/pictures/states_imgs/overlays/Ohio-img.png"  usemap="#ohio-overlay" id="oh-img" class="maps">
         <map name="ohio-overlay" id="ohio-img-map">
           <area target="" alt="ohio" id="Ohio"  href="#map-loc" coords="1014,299,1000,295,990,232,1018,228,1044,232,1065,229,1086,213,1096,252,1088,281,1063,297,1062,307,1040,301" shape="poly">
         </map>
@@ -224,11 +236,11 @@
         </map>
         <img src="media/pictures/states_imgs/overlays/Maine-img.png" usemap="#maine-overlay" id="me-img" class="maps">
         <map name="maine-overlay" id="Maine-img-map">
-          <area target="" alt="maine" id="maine"  href="#map-loc" coords="1306, 157, 1286, 112, 1288, 103, 1291, 90, 1291, 76, 1298, 60, 1302, 54, 1314, 57, 1326, 54, 1332, 58, 1340, 69, 1345, 78, 1350, 86, 1356, 88, 1365, 97, 1368, 98, 1376, 102, 1376, 108, 1367, 113, 1361, 118, 1353, 118, 1346, 120, 1340, 119, 1334, 130, 1335, 137, 1325, 141, 1318, 145, 1315, 157" shape="poly">
+          <area target="" alt="maine" id="Maine"  href="#map-loc" coords="1306, 157, 1286, 112, 1288, 103, 1291, 90, 1291, 76, 1298, 60, 1302, 54, 1314, 57, 1326, 54, 1332, 58, 1340, 69, 1345, 78, 1350, 86, 1356, 88, 1365, 97, 1368, 98, 1376, 102, 1376, 108, 1367, 113, 1361, 118, 1353, 118, 1346, 120, 1340, 119, 1334, 130, 1335, 137, 1325, 141, 1318, 145, 1315, 157" shape="poly">
         </map>
         <img src="media/pictures/states_imgs/overlays/New_Hampshire-img.png" usemap="#new_hampshire-overlay" id="nh-img" class="maps">
         <map name="new_hampshire-overlay" id="New_Hampshire-img-map">
-          <area target="" alt="new_hampshire" id="new_hampshire"  href="#map-loc" coords="1268, 157, 1272, 139, 1276, 123, 1286, 114, 1298, 134, 1309, 149, 1312, 158, 1312, 174, 1284, 177, 1271, 175" shape="poly">
+          <area target="" alt="new_hampshire" id="New_Hampshire"  href="#map-loc" coords="1268, 157, 1272, 139, 1276, 123, 1286, 114, 1298, 134, 1309, 149, 1312, 158, 1312, 174, 1284, 177, 1271, 175" shape="poly">
         </map>
         <img src="media/pictures/Blank_US_map.png" usemap="#background-map" id="background-map-id">
         <map name="background-map">
@@ -245,16 +257,16 @@
           <area target="" alt="Ohio" onmouseenter="state_hovered(document.querySelector('#oh-img'), document.querySelector('#Ohio'))" title="Ohio" id="Ohio-bg" href="#map-loc" coords="1034, 302, 1007, 294, 996, 277, 990, 244, 1025, 242, 1059, 242, 1071, 239, 1077, 236, 1084, 237, 1086, 249, 1086, 261, 1081, 278, 1072, 288, 1057, 301, 1049, 304" shape="poly">
           <area target="" alt="Kentucky" onmouseenter="state_hovered(document.querySelector('#ky-img'), document.querySelector('#Kentucky'))" title="Kentucky" id="Kentucky-bg" href="#map-loc" coords="1024, 349, 1010, 353, 960, 355, 922, 360, 910, 367, 895, 368, 910, 358, 918, 350, 937, 345, 957, 339, 977, 330, 991, 322, 1009, 310, 1034, 312, 1046, 312, 1052, 319, 1059, 333, 1057, 340, 1044, 347, 1033, 348" shape="poly">
           <area target="" alt="Tenesse" onmouseenter="state_hovered(document.querySelector('#tn-img'), document.querySelector('#Tennessee'))" title="Tennessee" id="Tenesse-bg" href="#map-loc" coords="878, 401, 884, 379, 955, 371, 1052, 361, 1066, 359, 1042, 374, 1014, 389, 1006, 393" shape="poly">
-          <area target="" alt="Indianna" onmouseenter="state_hovered(document.querySelector('#ia-img'), document.querySelector('#Indianna'))" title="Indianna" id="Indianna-bg" href="#map-loc" coords="984, 303, 963, 315, 941, 328, 932, 328, 927, 322, 933, 307, 930, 289, 929, 273, 926, 253, 941, 246, 967, 243, 976, 241, 982, 251, 983, 270, 986, 286, 987, 296" shape="poly">
+          <area target="" alt="Indiana" onmouseenter="state_hovered(document.querySelector('#ia-img'), document.querySelector('#Indiana'))" title="Indiana" id="Indiana-bg" href="#map-loc" coords="984, 303, 963, 315, 941, 328, 932, 328, 927, 322, 933, 307, 930, 289, 929, 273, 926, 253, 941, 246, 967, 243, 976, 241, 982, 251, 983, 270, 986, 286, 987, 296" shape="poly">
           <area target="" alt="disabled" onmouseenter="state_hovered(document.querySelector('#disabled'), document.querySelector('#disabled'))" title="disabled" id="disabled-bg" href="disab#map-loc" coords="776,541,719,569,678,593,678,640,627,615,585,557,548,538,514,557,472,528,421,486,383,483,367,492,267,467,200,440,150,433,112,396,65,366,46,329,28,267,19,226,31,176,36,151,59,106,88,67,86,18,117,32,132,25,132,8,291,36,406,54,503,60,598,64,733,64,772,79,804,85,832,85,850,88,806,116,824,119,861,111,885,112,932,114,959,110,976,117,983,124,940,158,935,195,946,219,930,237,920,250,925,317,909,347,867,400,844,450,841,458,770,459,781,510" shape="poly">
           <area target="" alt="Delaware" onmouseenter="state_hovered(document.querySelector('#de-img'), document.querySelector('#Delaware'))" title="Delaware" id="Delaware-bg" href="#map-loc" coords="1242, 284, 1228, 284, 1216, 260, 1225, 266" shape="poly">
           <area target="" alt="New Jersey" onmouseenter="state_hovered(document.querySelector('#nj-img'), document.querySelector('#New_Jersey'))" title="New Jersey" id="New Jersey-bg" href="#map-loc" coords="1230, 220, 1248, 224, 1242, 234, 1248, 239, 1252, 245, 1249, 257, 1247, 264, 1234, 262, 1232, 255, 1236, 248, 1237, 240, 1232, 235, 1228, 229" shape="poly">
-          <area target="" alt="New York" onmouseenter="state_hovered(document.querySelector('#ny-img'), document.querySelector('#Maine'))" title="New York" id="New York-bg" href="#map-loc" coords="1239, 208, 1210, 199, 1181, 205, 1141, 208, 1111, 213, 1127, 202, 1127, 192, 1146, 188, 1172, 187, 1186, 164, 1190, 146, 1207, 131, 1230, 130, 1238, 151, 1242, 172, 1243, 184, 1245, 199, 1246, 208" shape="poly">
-          <area target="" alt="Connecticut" onmouseenter="state_hovered(document.querySelector('#ct-img'), document.querySelector('#Maine'))" title="Connecticut" id="Connecticut-bg" href="#map-loc" coords="1259, 214, 1258, 198, 1287, 194, 1291, 203, 1281, 206" shape="poly">
-          <area target="" alt="Rhode Island" onmouseenter="state_hovered(document.querySelector('#ri-img'), document.querySelector('#Maine'))" title="Rhode Island" id="Rhode Island-bg" href="#map-loc" coords="1293, 192, 1300, 191, 1307, 202, 1298, 203" shape="poly">
-          <area target="" alt="Massachusetts" onmouseenter="state_hovered(document.querySelector('#ma-img'), document.querySelector('#Maine'))" title="Massachusetts" id="Massachusetts-bg" href="#map-loc" coords="1251, 181, 1293, 173, 1306, 172, 1307, 182, 1315, 189, 1298, 184, 1272, 188, 1255, 191, 1253, 187" shape="poly">
-          <area target="" alt="Vermont" onmouseenter="state_hovered(document.querySelector('#vt-img'), document.querySelector('#Maine'))" title="Vermont" id="Vermont-bg" href="#map-loc" coords="1253, 164, 1238, 129, 1254, 126, 1265, 121, 1263, 150, 1261, 162, 1260, 171" shape="poly">
-          <area target="" alt="New Hampshire" onmouseenter="state_hovered(document.querySelector('#nh-img'), document.querySelector('#Maine'))" title="New Hampshire" id="New Hampshire-bg" href="#map-loc" coords="1270, 153, 1273, 133, 1279, 121, 1276, 111, 1286, 134, 1291, 147, 1296, 156, 1300, 161, 1277, 164, 1271, 165" shape="poly">
+          <area target="" alt="New York" onmouseenter="state_hovered(document.querySelector('#ny-img'), document.querySelector('#New_York'))" title="New York" id="New York-bg" href="#map-loc" coords="1239, 208, 1210, 199, 1181, 205, 1141, 208, 1111, 213, 1127, 202, 1127, 192, 1146, 188, 1172, 187, 1186, 164, 1190, 146, 1207, 131, 1230, 130, 1238, 151, 1242, 172, 1243, 184, 1245, 199, 1246, 208" shape="poly">
+          <area target="" alt="Connecticut" onmouseenter="state_hovered(document.querySelector('#ct-img'), document.querySelector('#Connecticut'))" title="Connecticut" id="Connecticut-bg" href="#map-loc" coords="1259, 214, 1258, 198, 1287, 194, 1291, 203, 1281, 206" shape="poly">
+          <area target="" alt="Rhode Island" onmouseenter="state_hovered(document.querySelector('#ri-img'), document.querySelector('#Rhode_Island'))" title="Rhode Island" id="Rhode Island-bg" href="#map-loc" coords="1293, 192, 1300, 191, 1307, 202, 1298, 203" shape="poly">
+          <area target="" alt="Massachusetts" onmouseenter="state_hovered(document.querySelector('#ma-img'), document.querySelector('#Massachusetts'))" title="Massachusetts" id="Massachusetts-bg" href="#map-loc" coords="1251, 181, 1293, 173, 1306, 172, 1307, 182, 1315, 189, 1298, 184, 1272, 188, 1255, 191, 1253, 187" shape="poly">
+          <area target="" alt="Vermont" onmouseenter="state_hovered(document.querySelector('#vt-img'), document.querySelector('#Vermont'))" title="Vermont" id="Vermont-bg" href="#map-loc" coords="1253, 164, 1238, 129, 1254, 126, 1265, 121, 1263, 150, 1261, 162, 1260, 171" shape="poly">
+          <area target="" alt="New Hampshire" onmouseenter="state_hovered(document.querySelector('#nh-img'), document.querySelector('#New_Hampshire'))" title="New Hampshire" id="New Hampshire-bg" href="#map-loc" coords="1270, 153, 1273, 133, 1279, 121, 1276, 111, 1286, 134, 1291, 147, 1296, 156, 1300, 161, 1277, 164, 1271, 165" shape="poly">
           <area target="" alt="Maine" onmouseenter="state_hovered(document.querySelector('#me-img'), document.querySelector('#Maine'))" title="Maine" id="Maine-bg" href="#map-loc" coords="1302, 146, 1288, 116, 1294, 90, 1296, 67, 1316, 52, 1329, 57, 1341, 78, 1351, 93, 1360, 98, 1335, 108, 1316, 123, 1304, 136" shape="poly">
         </map>
       </div>

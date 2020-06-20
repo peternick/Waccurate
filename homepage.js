@@ -42,6 +42,7 @@ function parse_coords(coord_string){
     }
     return coord_arr;
 }
+
 /*  draws the outline of a state */
 function state_hovered(state_img, state_area){
     state_img.style.position = "absolute";
@@ -51,17 +52,36 @@ function state_hovered(state_img, state_area){
     state_img.style.marginTop = "2.9vw";
     state_img.style.zIndex = "20"
     state_img.style.display = "initial"
-    $(state_area).hover(function(){
+    var hovd = false;
+    
+    $(state_area).hover(function hovering(){       
+        hovd = true
         state_img.style.position = "absolute";
-        state_img.style.width = "1390px"
+        state_img.style.width = "1391px"
         state_img.style.height = "695px"
         state_img.style.marginLeft = "4.8vw";
         state_img.style.marginTop = "2.9vw";
         state_img.style.zIndex = "20";
         state_img.style.display = "initial";
-    }, function(){
+    }, function non_hover(){
+        /*var refresh = window.setInterval(checkbound, 3);
+        function checkbound(){
+            if(cnt % 2 == 0 && state_img.style.display == "initial"){
+                state_img.style.display = "none"
+                clearInterval(refresh);
+            }
+        }  */ 
         state_img.style.display = "none";
+        $(state_area).off('mouseenter mouseleave');
+        hovd=false;
     })
+    var hoving = window.setInterval(checkhov, 20);
+    function checkhov(){
+        if(hovd == false){
+            state_img.style.display = "none";
+            clearInterval(hoving);
+        }
+    }
 }
 
 /*function state_hovered(state_area_ele){
@@ -80,6 +100,23 @@ function state_hovered(state_img, state_area){
     cxt.lineTo(state_coords[0], state_coords[1]);
     cxt.stroke()
 }*/
+
+
+/*              *** icons map overlay ***               */
+var bg_map = document.querySelector('#background-map')
+
+console.log(bg_map)
+
+/*                  *** accuweather API ***             */
+/*var cities = {'Alabama': ['Montgomery'], 'Alaska': ['Juneau'], 'Arizona': ['Phoenix'], 'Arkansas': ['Little Rock'], 'Connecticut': ['Hartford'], 'Delaware': ['Dover'], 'Florida': ['Tallahassee'], 'Georgia': ['Atlanta'], 'Indiana': ['Indianapolis'], 'Kentucky': ['Frankfort'], 'Maine': ['Augusta'], 'Maryland': ['Annapolis'], 'Massachusetts': ['Boston'], 'Mississippi': ['Jackson'], 'New Hampshire': ['Concord'], 'New Jersey': ['Trenton'], 'New York': ['Albany'], 'North Carolina': ['Raleigh'], 'Ohio': ['Columbus'], 'Pennsylvania': ['Harrisburg'], 'Rhode Island': ['Providence'], 'South Carolina': ['Pierre'], 'Tennessee': ['Nashville'], 'Vermont': ['Montpelier'], 'Virginia': ['Richmond'], 'West Virginia': ['Charleston']}
+getdata()
+async function getdata(){
+    var all_states_api = await fetch('http://dataservice.accuweather.com/locations/v1/adminareas/US?apikey=8iaBpn2Bl4GZtA9cgdXZT0dtpW30DGiB')
+    var all_states = await all_states_api.json();
+    console.log(all_states)
+}*/
+
+
 
 
 /* used for seeing coordinates at location clicked */
