@@ -37,7 +37,6 @@
     border: dashed;
     border-color: blue;
 }
-
 #weather-icons-toggle{
     margin: 0em;
     margin-left: 1.5vw;
@@ -58,12 +57,7 @@
 }
 #row1, #row2{
     margin-left: 1vw;
-}
-#row1{
-    margin-top: 2vw;
-}
-#row2{
-    margin-top: 3vw;
+    margin-top: 0.5vw;
 }
 .input-label{
     margin: auto 0em;
