@@ -1,0 +1,23 @@
+{
+  "name": "wacc_pack",
+  "version": "1.0.0",
+  "description": "node for waccurate",
+  "main": "retrieval.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peternick/Waccurate.git"
+  },
+  "author": "Peter Apazidis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peternick/Waccurate/issues"
+  },
+  "homepage": "https://github.com/peternick/Waccurate#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "request": "^2.88.2"
+  }
+}
