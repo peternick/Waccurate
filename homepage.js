@@ -85,22 +85,6 @@ function state_hovered(state_img, state_area){
     }
 }
 
-/*function state_hovered(state_area_ele){
-    const canvas = document.querySelector('#map_canvas');
-    canvas.style.display = "initial"
-    const cxt = canvas.getContext('2d');
-    cxt.beginPath();
-    var i = 2;
-    const state_coords = state_coords_dict[state_area_ele.id];
-    const coord_arr_len = state_coords.length;
-    cxt.moveTo(state_coords[0], state_coords[1]);
-    while(i < coord_arr_len){
-        cxt.lineTo(state_coords[i], state_coords[i+1]);
-        i = i + 2;
-    }
-    cxt.lineTo(state_coords[0], state_coords[1]);
-    cxt.stroke()
-}*/
 
 
 /*              *** icons map overlay ***               */

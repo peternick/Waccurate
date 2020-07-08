@@ -1,6 +1,6 @@
 /*                  *** title bar ***               */
 .title-bar{
-    border: dashed;
+    margin-left: 1px;
     padding: 0em;
     overflow: hidden;
     position: relative;
@@ -27,37 +27,32 @@
 
 /*                  *** container for whole body ***                */
 #super-container{
-    border: dashed;
-    border-color: mediumaquamarine;
+ 
     padding: 0em;
 }
 
 /*                  *** input ***                   */
-.container{
-    border: dashed;
-    border-color: blue;
-}
-#weather-icons-toggle{
-    margin: 0em;
-    margin-left: 1.5vw;
-    padding: 0em;
-    width: 34vw;
-}
-#weather-icons-toggle .input-group .form-check-inline{
-    width: 8vw;
-}
+
 #input-pane{
-    border: dashed;
-    border-color: red;
+    padding-top: 1vw;
     margin-top: 7vw;
     width: 90vw;
     margin-left: 5vw;
     background-color: rgb(39, 114, 226);
     border-radius: 3em 0em;
+    border: solid;
+    border-color: black;
+    border-width: 0.5;
 }
-#row1, #row2{
+.container{
+    border: 3px solid transparent;
+    border-image-repeat: repeat;
+    border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
+    padding: 1em;
+}
+.row{
     margin-left: 1vw;
-    margin-top: 0.5vw;
+    margin-top: 1.5vw;
 }
 .input-label{
     margin: auto 0em;
@@ -68,9 +63,7 @@
     border-width: 0.1em;
     padding-right: 1em;
 }
-#hours-input-label .form-control{
-    width: 2em;
-}
+
 input[disabled='true']{
     border: solid rgb(110, 110, 70);
 }
