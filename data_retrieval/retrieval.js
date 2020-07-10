@@ -3,7 +3,7 @@ const path = require('path');
 const fetch = require('node-fetch')
 
 
-//iterates through all given states and their respective cities obtaining the correct id
+//iterates through all given states and their respective cities obtaining the correct Accuweather id associated with each city and initializing API data for each city
 async function load(cities_forecast_dic){
     for(state of Object.keys(cities_forecast_dic)){
          for(city of Object.keys(cities_forecast_dic[state])){
@@ -80,44 +80,59 @@ function initialize_weather_map(forecast_data){
 }
 
 //writes the whole cities_forecast_dic dictionary to a file to be stored
-function write_file(cities_forecast_dic, api_meta){
-    var curr_date_id = new Date()
-    curr_date_id = '' + curr_date_id.getFullYear() + '_' + (curr_date_id.getMonth() + 1) + '_' + curr_date_id.getDate() + '_' + curr_date_id.getHours()
+async function write_file(cities_forecast_dic, api_meta){
+    var curr_date = new Date()
+    curr_date_id = '' + curr_date.getFullYear() + '_' + (curr_date.getMonth() + 1) + '_' + curr_date.getDate() + '_' + curr_date.getHours()
     var wacc_dict = {};
     wacc_dict[curr_date_id] = cities_forecast_dic; 
     let file = './' + curr_date_id
     let append = false;
+    let file_data = ''
 
     if(api_meta == 'forecast'){
-        if(curr_date_id.getHours() == 8 || curr_date_id.getHours() == 9){
+        if(curr_date.getHours() == 8 || curr_date.getHours() == 9){
             append = true
-            var prev_date_id = new Date()
-            prev_date_id = '' + curr_date_id.getFullYear() + '_' + (curr_date_id.getMonth() + 1) + '_' + curr_date_id.getDate() - 1 + '_' + curr_date_id.getHours()
+            var prev_date_id = ''
+            prev_date_id = '' + curr_date.getFullYear() + '_' + (curr_date.getMonth() + 1) + '_' + (curr_date.getDate() - 1) + '_20'
             file = './' + prev_date_id
         }
         file =  './12hr_forecast_data/' + file + '_12hr_forecast.txt'
+        file_data = JSON.stringify(wacc_dict)
     }
     else if(api_meta == 'hist'){
         file =  './24hr_historical_data/' + file + '_24hr_hist.txt'
+        file_data = JSON.stringify(wacc_dict)
     }
 
     if(append == true){
-        fs.readFile(path.join(__dirname, file), "utf8", (err, file_text) => {
+        await fs.readFile(path.join(__dirname, file), "utf8", (err, file_text) => {
+
             file_text = file_text.substring(0, file_text.length - 1)
             file_text = file_text + ','
             var added_dictionary = (JSON.stringify(wacc_dict))
             added_dictionary = added_dictionary.substring(1, added_dictionary.length);
             file_text = file_text + added_dictionary;
+            file_data = file_text
+            fs.writeFile(
+                path.join(__dirname, file),
+                file_data,
+                err => {
+                if (err) throw err;
+                console.log('File appended');
+                }
+            ); 
         })
     }
-    fs.writeFile(
-        path.join(__dirname, file),
-        file_text,
-        err => {
-        if (err) throw err;
-        console.log('File appended');
-        }
-    ); 
+    else{
+        fs.writeFile(
+            path.join(__dirname, file),
+            file_data,
+            err => {
+            if (err) throw err;
+            console.log('File written');
+            }
+        ); 
+    }
 }
 
 /*              ***24 hour historical data***           */

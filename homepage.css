@@ -34,7 +34,7 @@
 /*                  *** input ***                   */
 
 #input-pane{
-    padding-top: 1vw;
+    padding: 1vw;
     margin-top: 7vw;
     width: 90vw;
     margin-left: 5vw;
@@ -44,24 +44,35 @@
     border-color: black;
     border-width: 0.5;
 }
-.container{
+#input-box-one .container{
     border: 3px solid transparent;
+    max-width: fit-content;
     border-image-repeat: repeat;
     border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
-    padding: 1em;
+    margin-left: 2vw;
+    min-width: fit-content;
 }
-.row{
-    margin-left: 1vw;
-    margin-top: 1.5vw;
+#input-box-two .container{
+    border: 3px solid transparent;
+    max-width: fit-content;
+    border-image-repeat: repeat;
+    border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
+    margin-left: 2vw;
+    min-width: fit-content;
 }
+.outer-container{
+    border: dashed;
+    border-color: red;
+}
+
 .input-label{
     margin: auto 0em;
-    margin-right: 1em;
+    margin-right: 1vw;
     font-size: 1em;
     border-right: solid gray;
     padding-bottom: 0.3vw;
     border-width: 0.1em;
-    padding-right: 1em;
+    padding-right: 1vw;
 }
 
 input[disabled='true']{
@@ -83,13 +94,29 @@ input[disabled='true']{
     border: solid dimgrey;
     background-color: dimgray;
     border-radius: 0.3em;
-    padding: 0.2em;
+    padding: 0.2vw;
     color: white;
 }
 .form-check-inline:hover{
     background-color: red;
     border-color: red;
 }
+#input-box-one{
+    display: grid;
+    grid-template-columns: 32% 42% 25%;
+    border: dashed;
+    border-color: yellow;
+    margin-bottom: 2em;
+}
+#input-box-two{
+    display: grid;
+    grid-template-columns: 36% 32% 26%;
+    border: dashed;
+    border-color: yellow;
+
+}
+
+
 
 /*                  *** map ***                 */
 #background-map-id{
