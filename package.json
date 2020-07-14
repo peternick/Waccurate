@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/peternick/Waccurate#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.0",
     "request": "^2.88.2"
   }

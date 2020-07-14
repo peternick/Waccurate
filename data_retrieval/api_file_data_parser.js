@@ -4,13 +4,14 @@ const fetch = require('node-fetch')
 
 
 //iterates through all given states and their respective cities obtaining the correct Accuweather id associated with each city and initializing API data for each city
-async function load(cities_forecast_dic){
+async function populate_location_dic(cities_forecast_dic, api_metadata_type){
     for(state of Object.keys(cities_forecast_dic)){
-         for(city of Object.keys(cities_forecast_dic[state])){
-          cities_forecast_dic[state][city] = await init_loc_key(city,state);
-          await intialize_forecast_data(cities_forecast_dic, state, city)
+        for(city of Object.keys(cities_forecast_dic[state])){
+            cities_forecast_dic[state][city] = await init_loc_key(city,state);
+            await intialize_api_data(cities_forecast_dic, state, city, api_metadata_type)
         }        
     }
+    await write_file(cities_forecast_dic, api_metadata_type);
 }
 
 //initializes the location key of a city with its respective state; the location key is a unique id used by the Accuweather API to identify a specific location
@@ -33,10 +34,15 @@ async function init_loc_key(city, state){
     }
 }
 
-
 //obtains 12 hour forecast data for a city 
-async function intialize_forecast_data(cities_forecast_dic, state, city){
-    const res = await fetch('http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' + cities_forecast_dic[state][city] + '?apikey=8iaBpn2Bl4GZtA9cgdXZT0dtpW30DGiB&details=true')
+async function intialize_api_data(cities_forecast_dic, state, city, api_metadata_type){
+
+    if(api_metadata_type == 'forecast'){
+        res = await fetch('http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' + cities_forecast_dic[state][city] + '?apikey=8iaBpn2Bl4GZtA9cgdXZT0dtpW30DGiB&details=true')
+    }
+    else{
+        res = await fetch('http://dataservice.accuweather.com/currentconditions/v1/' + cities_forecast_dic[state][city] + '/historical/24?apikey=8iaBpn2Bl4GZtA9cgdXZT0dtpW30DGiB&details=true')
+    }
     const weath = await res.json();
     const loc_key = cities_forecast_dic[state][city]
     cities_forecast_dic[state][loc_key] = initialize_weather_map(weath)
@@ -106,7 +112,6 @@ async function write_file(cities_forecast_dic, api_meta){
 
     if(append == true){
         await fs.readFile(path.join(__dirname, file), "utf8", (err, file_text) => {
-
             file_text = file_text.substring(0, file_text.length - 1)
             file_text = file_text + ','
             var added_dictionary = (JSON.stringify(wacc_dict))
@@ -135,33 +140,18 @@ async function write_file(cities_forecast_dic, api_meta){
     }
 }
 
-/*              ***24 hour historical data***           */
-async function load_historic_forecast(cities_forecast_dic){
-    for(state of Object.keys(cities_forecast_dic)){
-         for(city of Object.keys(cities_forecast_dic[state])){
-          cities_forecast_dic[state][city] = await init_loc_key(city,state);
-          await intialize_forecast_data_hist(cities_forecast_dic, state, city)
-        }        
-    }
-}
-async function intialize_forecast_data_hist(cities_forecast_dic, state, city){
-    const res = await fetch('http://dataservice.accuweather.com/currentconditions/v1/' + cities_forecast_dic[state][city] + '/historical/24?apikey=8iaBpn2Bl4GZtA9cgdXZT0dtpW30DGiB&details=true')
-    const weath = await res.json();
-    const loc_key = cities_forecast_dic[state][city]
-    cities_forecast_dic[state][loc_key] = initialize_weather_map(weath)
-}
-
-
-
 async function run_retrieval(){
  var cities_forecast_dic = {'Alabama': {'Montgomery':''}, 'Alaska': {'Juneau': ''}, 'Arizona': {'Phoenix': ''}, 'Arkansas': {'Little Rock': ''}, 'California': {'Sacramento': ''},    
- 'Connecticut': {'Hartford': ''},'Colorado': {'Denver': ''}, 'Delaware': {'Dover': ''}, 'Florida': {'Tallahassee': ''}, 'Georgia': {'Atlanta': ''},'Hawaii': {'Honolulu': ''}, 'Idaho': {'Boise': ''},'Illinois': {'Springfield': ''}, 'Indiana': {'Indianapolis': ''}, 'Iowa': {'Des Moines': ''}, 'Kansas': {'Topeka': ''},  'Kentucky': {'Frankfort': ''}, 'Louisiana': {'Baton Rouge': ''}, 'Maine': {'Augusta': ''}, 'Maryland': {'Annapolis': ''}, 'Massachusetts': {'Boston': ''}, 'Michigan': {'Lansing': ''}, 'Minnesota': {'St. Paul': ''}, 'Mississippi': {'Jackson': ''}, 
- 'Missouri': {'Jefferson City': ''}, 'Montana': {'Helena': ''}, 'Nebraska': {'Lincoln': ''}, 'Nevada': {'Carson City': ''},
- 'New Hampshire': {'Concord': ''}, 'New Jersey': {'Trenton': ''}, 'New Mexico': {'Santa Fe': ''}, 'New York': {'Albany': ''}, 'North Carolina': {'Raleigh': ''}, 'North Dakota': {'Bismarck': ''},'Ohio': {'Columbus': ''}, 'Oklahoma': {'Oklahoma City': ''}, 'Oregon': {'Salem': ''}, 'Pennsylvania': {'Harrisburg': ''}, 'Rhode Island': {'Providence': ''}, 'South Carolina': {'Columbia': ''}, 'South Dakota': {'Pierre': ''},'Tennessee': {'Nashville': ''}, 'Texas': {'Austin': ''}, 'Utah': {'Salt Lake City': ''},'Vermont': {'Montpelier': ''}, 'Virginia': {'Richmond': ''},'Washington': {'Olympia': ''}, 'West Virginia': {'Charleston': ''}, 'Wisconsin': {'Madison': ''}, 'Wyoming': {'Cheyenne': ''}};
- //await load(cities_forecast_dic);
- await load_historic_forecast(cities_forecast_dic)
- await write_file(cities_forecast_dic, 'hist');
-
+ 'Connecticut': {'Hartford': ''},'Colorado': {'Denver': ''}, 'Delaware': {'Dover': ''}, 'Florida': {'Tallahassee': ''}, 'Georgia': {'Atlanta': ''},'Hawaii': {'Honolulu': ''}, 
+ 'Idaho': {'Boise': ''},'Illinois': {'Springfield': ''}, 'Indiana': {'Indianapolis': ''}, 'Iowa': {'Des Moines': ''}, 'Kansas': {'Topeka': ''},  'Kentucky': {'Frankfort': ''}, 
+ 'Louisiana': {'Baton Rouge': ''}, 'Maine': {'Augusta': ''}, 'Maryland': {'Annapolis': ''}, 'Massachusetts': {'Boston': ''}, 'Michigan': {'Lansing': ''}, 'Minnesota': {'St. Paul': ''}, 
+ 'Mississippi': {'Jackson': ''}, 'Missouri': {'Jefferson City': ''}, 'Montana': {'Helena': ''}, 'Nebraska': {'Lincoln': ''}, 'Nevada': {'Carson City': ''},
+ 'New Hampshire': {'Concord': ''}, 'New Jersey': {'Trenton': ''}, 'New Mexico': {'Santa Fe': ''}, 'New York': {'Albany': ''}, 'North Carolina': {'Raleigh': ''}, 
+ 'North Dakota': {'Bismarck': ''},'Ohio': {'Columbus': ''}, 'Oklahoma': {'Oklahoma City': ''}, 'Oregon': {'Salem': ''}, 'Pennsylvania': {'Harrisburg': ''}, 
+ 'Rhode Island': {'Providence': ''}, 'South Carolina': {'Columbia': ''}, 'South Dakota': {'Pierre': ''},'Tennessee': {'Nashville': ''}, 'Texas': {'Austin': ''}, 
+ 'Utah': {'Salt Lake City': ''},'Vermont': {'Montpelier': ''}, 'Virginia': {'Richmond': ''},'Washington': {'Olympia': ''}, 'West Virginia': {'Charleston': ''}, 
+ 'Wisconsin': {'Madison': ''}, 'Wyoming': {'Cheyenne': ''}};
+ await populate_location_dic(cities_forecast_dic, 'forecast');
 }
 
 run_retrieval()
