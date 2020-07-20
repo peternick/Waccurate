@@ -54,12 +54,19 @@ async function match_files(){
 }
 
 //runner
-match_files().then(() =>{
-    associate_data()
-})
+runner()
+async function runner(){
+    await match_files()
+    let wacc_json_arrs = await associate_data()
+    get_stat(wacc_json_arrs, get_temp_stat, "Temperature", 4)
+    
+}
 
-/*parses forecast and historical forecast text files from their respective folders into javascript objs; this is where all statistics should be retrieved */
+/*parses forecast and historical forecast text files from their respective folders into javascript objs; this is where all statistics should be retrieved 
+
+*/
 async function associate_data(){
+    let json_dic = {}
     for(hist_file of Object.keys(file_match_up)){
         console.log('outer')
         try{
@@ -78,14 +85,15 @@ async function associate_data(){
             let evening_json = await parse_file_text(forecast_evening, hist_file, '')
             let hist_json = await parse_file_text(hist_file, hist_file, '')
             
-            console.log(get_real_feel_temp_stat(morning_json, evening_json, hist_json, 4))
-            console.log('end')
+            json_dic[hist_file] = [morning_json, evening_json, hist_json]
+            // console.log('end')
             
         }
         catch(err){
             console.log('from function -associate_data()- ' + err)
         }
     }
+    return json_dic
 }
 
 /*helper function that takes a text file which gets parsed into a JS object and retrieves data from a certain date of a forecast*/
@@ -126,20 +134,35 @@ async function parse_file_text(text_data, history_file, period){
 }
 
 
-function get_real_feel_temp_stat(morning, evening, hist, precision){
-    let real_feel_forecast = {}
-    let real_feel_hist = {}
+function get_stat(wacc_json_arr, stat_func, stat_name){
+    for(hist_file of Object.keys(wacc_json_arr)){
+        let morning = wacc_json_arr[hist_file][0]
+        let evening = wacc_json_arr[hist_file][1]
+        let hist =  wacc_json_arr[hist_file][2]
+        if(stat_name == 'Temperature' || stat_name == "RealFeelTemperature"){
+            console.log(stat_func(stat_name, morning, evening, hist, arguments[3]))
+        }
+    }
+}
 
-    create_real_feel_dic(morning, real_feel_forecast, true)
-    create_real_feel_dic(evening, real_feel_forecast, false)
-    create_real_feel_dic(hist, real_feel_hist, true)
+/*returns the percentage accuracy of a specified temperature statistic, either real feel or normal temperature, given a degree of precision */
+//temp_stat: the temperature statistic from the Accuweather API. Can be one of two values: 'RealFeelTemperature' or 'Temperature'
+//morning: the morning json object read in from customized files associated with the Accuweather API
+//evening: the evening json object read in from customized files associated with the Accuweather API
+//hist: the hist json object read in from customized files associated with the Accuweather API
+//precison: the number of degrees by which 
+function get_temp_stat(temp_stat, morning, evening, hist, precision){
+    let temp_forecast = {}
+    let temp_hist = {}
+
+    create_temp_dic(temp_stat, morning, evening, hist, temp_forecast, temp_hist)
     
     let precision_accuracy = []
-    for(state of Object.keys(real_feel_hist)){
-        for(hour of Object.keys(real_feel_hist[state])){
-            let hist_real_feel_val = real_feel_hist[state][hour]
-            let forecast_real_feel_val = real_feel_forecast[state][hour]
-            let difference = Math.abs(forecast_real_feel_val - hist_real_feel_val)
+    for(state of Object.keys(temp_hist)){
+        for(hour of Object.keys(temp_hist[state])){
+            let hist_temp_val = temp_hist[state][hour]
+            let forecast_temp_val = temp_forecast[state][hour]
+            let difference = Math.abs(forecast_temp_val - hist_temp_val)
             if(difference > precision){
                 precision_accuracy.push('inaccurate')
             }
@@ -164,16 +187,61 @@ function get_real_feel_temp_stat(morning, evening, hist, precision){
     return real_feel_percentage
 }
 
-/*creates a dictionary of real feel temperature statistics retrieved from the custom made files based on Accuweather API data*/
-function create_real_feel_dic(json_data, real_feel_dic, bool_new_dic){
-    for(state of Object.keys(json_data)){
-        if(bool_new_dic){
-            real_feel_dic[state] = {}
+/*creates a dictionary of temperature statistics retrieved from the custom made files based on Accuweather API data*/
+function create_temp_dic(temp_stat, morning_data, evening_data, hist_data, forecast_dic, hist_dic){
+    let data_files_arr = [morning_data, evening_data, hist_data]
+    let temp_dic = {}
+    for(json_data of data_files_arr){
+        for(state of Object.keys(json_data)){
+            if(json_data != hist_data){
+                temp_dic = forecast_dic
+            }
+            else{
+                temp_dic = hist_dic
+            }
+            if(json_data != evening_data){
+                temp_dic[state] = {}
+            }
+            let loc_code = Object.keys(json_data[state])[0]
+            let hr_statistic_dic = json_data[state][loc_code]
+            for(hour of Object.keys(hr_statistic_dic)){
+                temp_dic[state][hour] = json_data[state][loc_code][hour][temp_stat]
+            }
         }
-        let loc_code = Object.keys(json_data[state])[0]
-        let hr_statistic_dic = json_data[state][loc_code]
-        for(hour of Object.keys(hr_statistic_dic)){
-            real_feel_dic[state][hour] = json_data[state][loc_code][hour]["RealFeelTemperature"]
+    }
+}
+
+
+
+function get_precipitation_stat(morning, evening, hist){
+    let precip_forecast = {}
+    let precip_hist = {}
+
+    create_precip_dic(morning, evening, hist, precip_forecast, precip_hist)
+
+
+}
+
+
+function create_precip_dic(morning_data, evening_data, hist_data, forecast_dic, hist_dic){
+    let data_files_arr = [morning_data, evening_data, hist_data]
+    let precip_dic = {}
+    for(json_data of data_files_arr){
+        for(state of Object.keys(json_data)){
+            if(json_data != hist_data){
+                precip_dic = forecast_dic
+            }
+            else{
+                precip_dic = hist_dic
+            }
+            if(json_data != evening_data){
+                precip_dic[state] = {}
+            }
+            let loc_code = Object.keys(json_data[state])[0]
+            let hr_statistic_dic = json_data[state][loc_code]
+            for(hour of Object.keys(hr_statistic_dic)){
+                precip_dic[state][hour] = [json_data[state][loc_code][hour]["Precipitation"], json_data[state][loc_code][hour]["PrecipitationProbablity"]]
+            }
         }
     }
 }
