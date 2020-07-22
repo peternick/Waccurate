@@ -151,7 +151,7 @@ async function run_retrieval(){
  'Rhode Island': {'Providence': ''}, 'South Carolina': {'Columbia': ''}, 'South Dakota': {'Pierre': ''},'Tennessee': {'Nashville': ''}, 'Texas': {'Austin': ''}, 
  'Utah': {'Salt Lake City': ''},'Vermont': {'Montpelier': ''}, 'Virginia': {'Richmond': ''},'Washington': {'Olympia': ''}, 'West Virginia': {'Charleston': ''}, 
  'Wisconsin': {'Madison': ''}, 'Wyoming': {'Cheyenne': ''}};
- await populate_location_dic(cities_forecast_dic, 'forecast');
+ await populate_location_dic(cities_forecast_dic, 'hist');
 }
 
 run_retrieval()

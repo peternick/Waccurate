@@ -58,7 +58,7 @@ runner()
 async function runner(){
     await match_files()
     let wacc_json_arrs = await associate_data()
-    get_stat(wacc_json_arrs, get_temp_stat, "Temperature", 4)
+    get_stat(wacc_json_arrs, get_precip_stat, "Precipitation", 0.01)
     
 }
 
@@ -142,6 +142,9 @@ function get_stat(wacc_json_arr, stat_func, stat_name){
         if(stat_name == 'Temperature' || stat_name == "RealFeelTemperature"){
             console.log(stat_func(stat_name, morning, evening, hist, arguments[3]))
         }
+        else if(stat_name = 'Precipitation'){
+            console.log(stat_func( morning, evening, hist, arguments[3]))
+        }
     }
 }
 
@@ -170,7 +173,7 @@ function get_temp_stat(temp_stat, morning, evening, hist, precision){
                 precision_accuracy.push('accurate')
             }
             else{
-                console.log('possible error: difference= ' + difference + ' precison =' + precision)
+                console.log('possible error: difference= ' + difference)
             }
         }
     }
@@ -205,7 +208,9 @@ function create_temp_dic(temp_stat, morning_data, evening_data, hist_data, forec
             let loc_code = Object.keys(json_data[state])[0]
             let hr_statistic_dic = json_data[state][loc_code]
             for(hour of Object.keys(hr_statistic_dic)){
-                temp_dic[state][hour] = json_data[state][loc_code][hour][temp_stat]
+                
+                    temp_dic[state][hour] = json_data[state][loc_code][hour][temp_stat]
+                
             }
         }
     }
@@ -213,13 +218,49 @@ function create_temp_dic(temp_stat, morning_data, evening_data, hist_data, forec
 
 
 
-function get_precipitation_stat(morning, evening, hist){
+function get_precip_stat(morning, evening, hist, precision){
     let precip_forecast = {}
     let precip_hist = {}
+    let precip_scale_val = 0;
+    let total_precip_scale = 0
+    let precip_score = 0
 
     create_precip_dic(morning, evening, hist, precip_forecast, precip_hist)
 
+    for(state of Object.keys(precip_hist)){
+        for(hour of Object.keys(precip_hist[state])){
+            if(precip_forecast[state][hour] != undefined){
+                let rain_val = precip_forecast[state][hour][0]
+                let precip_prob = precip_forecast[state][hour][1]
+                // console.log(precip_hist[state])
+                // console.log('here' + hour)
+                let true_precip = precip_hist[state][hour][0]
+                let has_precip = precip_hist[state][hour][1]
+                total_precip_scale = total_precip_scale + 100
+                if(true_precip + precision > rain_val  && true_precip - precision < rain_val){
+                    precip_scale_val = precip_scale_val + 100
+                    if(has_precip == 'true'){
+                        precip_scale_val = precip_scale_val - (100 - precip_prob)
+                    }
+                    else{
+                        precip_scale_val = precip_scale_val - precip_prob
+                    }
+                }
+                else{
+                    if(has_precip == 'true'){
+                        precip_scale_val = precip_scale_val + (100 - precip_prob)
+                    }
+                    else{
+                        precip_scale_val = precip_scale_val + precip_prob
+                    }
+                }
+            }
+            
+        }
+    }
+    precip_score = precip_scale_val/total_precip_scale
 
+    return precip_score
 }
 
 
@@ -240,7 +281,12 @@ function create_precip_dic(morning_data, evening_data, hist_data, forecast_dic, 
             let loc_code = Object.keys(json_data[state])[0]
             let hr_statistic_dic = json_data[state][loc_code]
             for(hour of Object.keys(hr_statistic_dic)){
-                precip_dic[state][hour] = [json_data[state][loc_code][hour]["Precipitation"], json_data[state][loc_code][hour]["PrecipitationProbablity"]]
+                if(json_data != hist_data){
+                    precip_dic[state][hour] = [json_data[state][loc_code][hour]["RainVal"]["Value"], json_data[state][loc_code][hour]["PrecipitationProbability"]]
+                }
+                else{
+                    precip_dic[state][hour] = [json_data[state][loc_code][hour]["Precipitation"]["Value"], json_data[state][loc_code][hour]["HasPrecipitation"]]
+                }
             }
         }
     }
