@@ -54,13 +54,7 @@ async function match_files(){
 }
 
 //runner
-runner()
-async function runner(){
-    await match_files()
-    let wacc_json_arrs = await associate_data()
-    get_stat(wacc_json_arrs, get_precip_stat, "Precipitation", 0.01)
-    
-}
+
 
 /*parses forecast and historical forecast text files from their respective folders into javascript objs; this is where all statistics should be retrieved 
 
@@ -133,20 +127,35 @@ async function parse_file_text(text_data, history_file, period){
     })
 }
 
+runner()
+async function runner(){
+    await match_files()
+    let wacc_json_arrs = await associate_data()
+    console.log(get_stat(wacc_json_arrs, get_weather_stat, "Weather"))
+    
+}
 
 function get_stat(wacc_json_arr, stat_func, stat_name){
+    let total_stat_values = 0
+    let total_num_vals = 0
     for(hist_file of Object.keys(wacc_json_arr)){
         let morning = wacc_json_arr[hist_file][0]
         let evening = wacc_json_arr[hist_file][1]
         let hist =  wacc_json_arr[hist_file][2]
         if(stat_name == 'Temperature' || stat_name == "RealFeelTemperature"){
-            console.log(stat_func(stat_name, morning, evening, hist, arguments[3]))
+            total_stat_values = total_stat_values + stat_func(stat_name, morning, evening, hist, arguments[3])
         }
         else if(stat_name = 'Precipitation'){
-            console.log(stat_func( morning, evening, hist, arguments[3]))
+            total_stat_values = total_stat_values + stat_func(morning, evening, hist, arguments[3])
         }
+        else if(stat_name == 'Weather'){
+            total_stat_values = total_stat_values + stat_func(morning, evening, hist)
+        }
+        total_num_vals++
     }
+    return total_stat_values/total_num_vals
 }
+
 
 /*returns the percentage accuracy of a specified temperature statistic, either real feel or normal temperature, given a degree of precision */
 //temp_stat: the temperature statistic from the Accuweather API. Can be one of two values: 'RealFeelTemperature' or 'Temperature'
@@ -154,7 +163,7 @@ function get_stat(wacc_json_arr, stat_func, stat_name){
 //evening: the evening json object read in from customized files associated with the Accuweather API
 //hist: the hist json object read in from customized files associated with the Accuweather API
 //precison: the number of degrees by which 
-function get_temp_stat(temp_stat, morning, evening, hist, precision){
+function get_temp_stat(morning, evening, hist, precision, temp_stat){
     let temp_forecast = {}
     let temp_hist = {}
 
@@ -216,8 +225,8 @@ function create_temp_dic(temp_stat, morning_data, evening_data, hist_data, forec
     }
 }
 
-
-
+//TODO: find out why precision is having no effect on this function
+//returns the accuracy of predictions for the amount of precipitation in at most 24 hours; precipitation probability is taken into account when determining percentages
 function get_precip_stat(morning, evening, hist, precision){
     let precip_forecast = {}
     let precip_hist = {}
@@ -255,7 +264,6 @@ function get_precip_stat(morning, evening, hist, precision){
                     }
                 }
             }
-            
         }
     }
     precip_score = precip_scale_val/total_precip_scale
@@ -287,6 +295,55 @@ function create_precip_dic(morning_data, evening_data, hist_data, forecast_dic, 
                 else{
                     precip_dic[state][hour] = [json_data[state][loc_code][hour]["Precipitation"]["Value"], json_data[state][loc_code][hour]["HasPrecipitation"]]
                 }
+            }
+        }
+    }
+}
+
+
+function get_weather_stat(morning, evening, hist){
+    let weather_forecast = {}
+    let weather_hist = {}
+    let accurates = 0
+    let total = 0
+    let percentage_accuracy = 0
+
+    create_weather_dic(morning, evening, hist, weather_forecast, weather_hist)
+
+    for(state of Object.keys(weather_hist)){
+        for(hour of Object.keys(weather_hist[state])){
+            if(weather_forecast[state][hour] != undefined){
+                let forecast_weather = weather_forecast[state][hour]
+                let hist_weather = weather_hist[state][hour]
+                if(forecast_weather == hist_weather){
+                    accurates++
+                }
+                total++
+            }
+        }
+    }
+    percentage_accuracy = accurates/total
+    return percentage_accuracy
+}
+
+function create_weather_dic(morning_data, evening_data, hist_data, forecast_dic, hist_dic){
+    let data_files_arr = [morning_data, evening_data, hist_data]
+    let weather_dic = {}
+    for(json_data of data_files_arr){
+        for(state of Object.keys(json_data)){
+            if(json_data != hist_data){
+                weather_dic = forecast_dic
+            }
+            else{
+                weather_dic = hist_dic
+            }
+            if(json_data != evening_data){
+                weather_dic[state] = {}
+            }
+            let loc_code = Object.keys(json_data[state])[0]
+            let hr_statistic_dic = json_data[state][loc_code]
+            for(hour of Object.keys(hr_statistic_dic)){
+                weather_dic[state][hour] = json_data[state][loc_code][hour]["Weather"]
             }
         }
     }
