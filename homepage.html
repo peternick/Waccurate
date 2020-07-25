@@ -64,7 +64,6 @@
                 <div class="dropdown-menu">
                   <a class="dropdown-item">Temperature</a>
                   <a class="dropdown-item">Precipitation</a>
-                  <a class="dropdown-item">Rain Amount</a>
                   <a class="dropdown-item">Weather</a>
                 </div>
                 <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
@@ -72,23 +71,12 @@
           </div>
         </div>
         <div id='input-box-two'>
-          <div class="container">
+          <div class="container input-widget">
             <div class="input-group flex-nowrap mb-3" id="time-units-group">
-              <p class="input-label" id="hours-input-label">time until prediction:</p>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#days-checkbtn'), document.querySelector('#time-units-group'))" id="days-checkbtn">
-                <input class="form-check-input"  id="days-checkbox" type="radio" name="time-btn">
-                <label class="form-check-label" for="time">
-                  Days
-                </label>
-              </div>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#hours-checkbtn'), document.querySelector('#time-units-group'))" id="hours-checkbtn">
-                <input class="form-check-input"  id="hours-checkbox" type="radio" name="time-btn">
-                <label class="form-check-label" for="time">
-                  Hours
-                </label>
-              </div>
+              <p class="input-label" id="hours-input-label">Time until prediction:</p>
+              
               <input type="text" class="form-control input-capture" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="number of hours from now until a certain point at which Accuweather makes a weather prediction">
-              <button type="button" class="btn btn-success"> ok </button>
+              
             </div>
           </div>
           <div class="container input-widget" id="states-dropdown">
@@ -149,20 +137,22 @@
                 </select>
                 </div>
                 <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
-                <button type="button" class="btn btn-success"> ok </button>
+                
             </div>
           </div>
           <div class="container input-widget" id="margin-err">
             <div class="input-group flex-nowrap mb-3" id="time-units-group">
               <p class="input-label" id="margin-err-label">percentage error:</p>
               <input type="text" class="form-control input-capture" aria-label="Text input with dropdown butto" data-toggle="tooltip" data-placement="top" title="number of hours ">
-              <button type="button" class="btn btn-success"> ok </button>
+              
+            </div>
+          </div>
+          <div class="container" id='ok-btn-container'>
+            <div class="input-group flex-nowrap mb-3">
+              <button type="button" class="btn btn-success" id="ok-btn"> Calculate </button>
             </div>
           </div>
         </div>
-      </div>
-      <div id="output-pane">
-        
       </div>
       <div class="map-container container-fluid">
         <!--<canvas width="1410" height="700" id="map_canvas"></canvas> -->
@@ -412,6 +402,12 @@
           <area target="" alt="Wisconsin" onmouseenter="state_hovered(document.querySelector('#wi-img'), document.querySelector('#Wisconsin'))" title="Wisconsin" id="Wisconsin-bg" href="#map-loc" coords="908, 223, 856, 230, 842, 212, 834, 190, 818, 186, 805, 178, 800, 167, 800, 162, 811, 143, 819, 138, 860, 140, 885, 150, 900, 166, 907, 179, 912, 196, 908, 212" shape="poly">
           <area target="" alt="Michigan" onmouseenter="state_hovered(document.querySelector('#mi-img'), document.querySelector('#Michigan'))" title="Michigan" id="Michigan-bg" href="#map-loc" coords="1013, 231, 952, 236, 955, 210, 947, 195, 944, 172, 899, 148, 866, 135, 859, 120, 908, 112, 956, 117, 987, 129, 1012, 154, 1033, 183, 1039, 199, 1032, 213, 1019, 226, 1016, 227, 1013, 230" shape="poly">
         </map>
+      </div>
+    </div>
+    <div class="container output-container">
+      <div class="input-group flex-nowrap mb-3">
+        <p class="output-text" id="output-label">Weather Statistic Accuracy For The Whole Nation: </p>
+        <output> hi </output>
       </div>
     </div>
   </body>

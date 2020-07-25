@@ -51,18 +51,16 @@
     border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
     margin-left: 2vw;
     min-width: fit-content;
+    padding-top: 0.6em
 }
-#input-box-two .container{
+#input-box-two .input-widget{
     border: 3px solid transparent;
     max-width: fit-content;
     border-image-repeat: repeat;
     border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
     margin-left: 2vw;
     min-width: fit-content;
-}
-.outer-container{
-    border: dashed;
-    border-color: red;
+    padding-top: 0.6em
 }
 
 .input-label{
@@ -86,6 +84,7 @@ input[disabled='true']{
     background-color: rgb(66, 185, 36);
     color: white;
     margin-left: 0.3vw;
+    width: 7em;
 }
 .btn:hover{
     background-color: red;
@@ -106,14 +105,20 @@ input[disabled='true']{
     grid-template-columns: 32% 42% 25%;
     border: dashed;
     border-color: yellow;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 #input-box-two{
     display: grid;
-    grid-template-columns: 36% 32% 26%;
+    grid-template-columns: 30% 34% 23% 10%;
     border: dashed;
     border-color: yellow;
-
+}
+#ok-btn-container{
+    margin-left: 1em;
+}
+#ok-btn{
+    margin-top: 0.5em;
+    padding-left: 1em;
 }
 
 
@@ -142,11 +147,20 @@ body{
     background-image: linear-gradient(to right, rgb(57, 50, 121), rgb(96, 86, 184), rgb(57, 50, 121));
 }
 
-.blah{
-    position: absolute;
-    width: 1400px;
-    height: 695px;
-    margin-left: 6.6vw;
-    margin-top: 76.1vw;
-}
 
+.output-container{
+    border: solid;
+    border-width: 2px;
+    background-color: orange;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    
+}
+.output-container #output-text{
+    margin-left: 1em;
+}
+#output-label{
+    font-size: 2em;
+    padding-top: 0.5em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
