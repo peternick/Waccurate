@@ -97,7 +97,7 @@ async function write_file(cities_forecast_dic, api_meta){
 
     if(api_meta == 'forecast'){
         if(curr_date.getHours() == 8 || curr_date.getHours() == 9){
-            append = true
+            
             var prev_date_id = ''
             prev_date_id = '' + curr_date.getFullYear() + '_' + (curr_date.getMonth() + 1) + '_' + (curr_date.getDate() - 1) + '_20'
             file = './' + prev_date_id
@@ -151,7 +151,7 @@ async function run_retrieval(){
  'Rhode Island': {'Providence': ''}, 'South Carolina': {'Columbia': ''}, 'South Dakota': {'Pierre': ''},'Tennessee': {'Nashville': ''}, 'Texas': {'Austin': ''}, 
  'Utah': {'Salt Lake City': ''},'Vermont': {'Montpelier': ''}, 'Virginia': {'Richmond': ''},'Washington': {'Olympia': ''}, 'West Virginia': {'Charleston': ''}, 
  'Wisconsin': {'Madison': ''}, 'Wyoming': {'Cheyenne': ''}};
- await populate_location_dic(cities_forecast_dic, 'hist');
+ await populate_location_dic(cities_forecast_dic, 'forecast');
 }
 
 run_retrieval()

@@ -120,6 +120,15 @@ input[disabled='true']{
     margin-top: 0.5em;
     padding-left: 1em;
 }
+#outputLabel{
+    font-family: 'Balthazar';
+    font-size: 2em;
+}
+.result{
+    margin-left: 2em;
+    font-family: 'Poppins';
+    font-size: 2em;
+}
 
 
 
