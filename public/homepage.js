@@ -77,23 +77,32 @@ calculate_btn.addEventListener('click', get_statistic)
 /*  draws the outline of a state */
 function state_hovered(state_img, state_area){
     state_img.style.position = "absolute";
-    state_img.style.width = "1400px"
-    state_img.style.height = "695px"
-    state_img.style.marginLeft = "4.4vw";
-    state_img.style.marginTop = "2.9vw";
-    state_img.style.zIndex = "20"
+            state_img.style.width = "1410px"
+            state_img.style.height = "705px"
+            state_img.style.marginLeft = "5vw";
+            state_img.style.marginTop = "3vw";
+            state_img.style.zIndex = "20";
+            state_img.style.display = "initial";
+            state_img.style.border = "ridge";
+            state_img.style.borderRadius = "4em";
+            state_img.style.borderWidth = "1em";
+            state_img.style.borderColor = "maroon"
     state_img.style.display = "initial"
     var hovd = false;
     
     $(state_area).hover(function hovering(){       
             hovd = true
             state_img.style.position = "absolute";
-            state_img.style.width = "1400px"
-            state_img.style.height = "695px"
-            state_img.style.marginLeft = "4.4vw";
-            state_img.style.marginTop = "2.9vw";
+            state_img.style.width = "1410px"
+            state_img.style.height = "705px"
+            state_img.style.marginLeft = "5vw";
+            state_img.style.marginTop = "3vw";
             state_img.style.zIndex = "20";
             state_img.style.display = "initial";
+            state_img.style.border = "ridge";
+            state_img.style.borderRadius = "4em";
+            state_img.style.borderWidth = "1em";
+            state_img.style.borderColor = "maroon"
         }, function non_hover(){
             state_img.style.display = "none";
             $(state_area).off('mouseenter mouseleave');
@@ -122,14 +131,14 @@ var state_areas = bg_map.children;
 
 /******                                                    ***DATA MANAGER***           *********/
 
-// get_statistic()
-// async function get_statistic(){
-//     //retrieve the raw json weather data created by file_to_json.js
-//     let wacc_json_dic = {}
-//     await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res)
-//     //let weather_statistic = document.querySelector('#weather-stat .dropdown-btn .form-control').defaultValue
-//     console.log(get_stat(wacc_json_dic, get_hour_precip_stat, "Hour_Precip", 3, '14'))
-// }
+get_statistic()
+async function get_statistic(){
+    //retrieve the raw json weather data created by file_to_json.js
+    let wacc_json_dic = {}
+    await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res)
+    //let weather_statistic = document.querySelector('#weather-stat .dropdown-btn .form-control').defaultValue
+    console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
+}
 
 
 /* returns a measurement value of a certain weather related statistic based on the passed in function; iterates over all custom made files based on the Accuweather API */
@@ -159,7 +168,7 @@ function get_stat(wacc_json_dic, stat_func, stat_name){
         else if(stat_name == "Hour_Temperature"){
             let precision = arguments[3]
             let hour = arguments[4]
-            func = stat_func(morning, evening, hist, precision, "Temperature", hour)
+            func = stat_func(morning, evening, hist, precision, hour)
         }
         else if(stat_name == "Hour_Precip"){
             func = stat_func(morning, evening, hist, arguments[3], arguments[4])
@@ -393,6 +402,72 @@ function create_weather_dic(morning_data, evening_data, hist_data, forecast_dic,
 }
 
 
+function get_hour_temp_stat(morning, evening, hist, precision, hours){
+    let temp_forecast = {}
+    let temp_hist = {}
+    let temp_scale_val = 0;
+    let total_temp_scale = 1
+    let temp_score = 0
+
+    create_hour_temp_dic(morning, evening, hist, temp_forecast, temp_hist, hours)
+    for(state of Object.keys(temp_hist)){
+        let morning_forecast = temp_forecast[state]["morning"]
+        let evening_forecast = temp_forecast[state]["evening"]
+        let evening_hist = temp_hist[state]["evening"]
+        let morning_hist = temp_hist[state]["morning"]
+        if(morning_forecast != undefined && evening_forecast != undefined  && evening_hist != undefined && morning_hist != undefined){
+            for(time of Object.keys(temp_hist[state])){
+                total_temp_scale = total_temp_scale + 1
+                let temp_val = temp_forecast[state][time]
+                let true_temp = temp_hist[state][time]
+                if(true_temp + precision > temp_val  && true_temp - precision < temp_val){
+                    temp_scale_val = temp_scale_val + 1
+                }
+            }
+        }
+    }
+    // console.log(temp_scale_val + 'scale')
+    // console.log(total_temp_scale + 'total')
+    temp_score = temp_scale_val/total_temp_scale
+
+    return temp_score
+}
+
+function create_hour_temp_dic(morning_data, evening_data, hist_data, forecast_dic, hist_dic, hours){
+    
+    let err = 0
+    const START_MORNING = 9
+    const START_NIGHT = 21
+    const HRS_LATER_MORNING = START_MORNING + parseInt(hours)
+    const HRS_LATER_NIGHT = (START_NIGHT +  parseInt(hours)) % 24  
+ 
+    for(state of Object.keys(hist_data)){
+        let loc_code = Object.keys(hist_data[state])[0]
+        forecast_dic[state] = {}
+        hist_dic[state] = {}
+        
+        if(hist_data[state][loc_code][HRS_LATER_MORNING] != undefined && hist_data[state][loc_code][HRS_LATER_NIGHT] != undefined && morning_data[state][loc_code][HRS_LATER_MORNING] != undefined && evening_data[state][loc_code][HRS_LATER_NIGHT] != undefined){
+            let morning_forecast = morning_data[state][loc_code][HRS_LATER_MORNING]["Temperature"]
+            let evening_forecast = evening_data[state][loc_code][HRS_LATER_NIGHT]["Temperature"]
+            let morning_history = hist_data[state][loc_code][HRS_LATER_MORNING]["Temperature"]
+            let evening_history = hist_data[state][loc_code][HRS_LATER_NIGHT]["Temperature"]
+
+            if(morning_forecast != undefined && evening_forecast != undefined && morning_history != undefined && evening_history != undefined ){
+                forecast_dic[state]["morning"] = morning_forecast
+                forecast_dic[state]["evening"] = evening_forecast
+                hist_dic[state]["morning"] = morning_history
+                hist_dic[state]["evening"] = evening_history
+            } 
+        }
+        else{
+            //console.log(Object.keys(json_data[state]))
+            console.log('here')
+            err++
+        }
+    }
+}
+
+
 function get_hour_precip_stat(morning, evening, hist, precision, hours){
     let precip_forecast = {}
     let precip_hist = {}
@@ -401,29 +476,34 @@ function get_hour_precip_stat(morning, evening, hist, precision, hours){
     let precip_score = 0
 
     create_hour_precip_dic(morning, evening, hist, precip_forecast, precip_hist, hours)
-
     for(state of Object.keys(precip_hist)){
-        if(precip_forecast[state][hours] != undefined && precip_hist[state][hours] != undefined){
-            let rain_val = precip_forecast[state][hours][0]
-            let precip_prob = precip_forecast[state][hours][1]
-            let true_precip = precip_hist[state][hours][0]
-            let has_precip = precip_hist[state][hours][1]
+        let morning_forecast = precip_forecast[state]["morning"]
+        let evening_forecast = precip_forecast[state]["evening"]
+        let evening_hist = precip_hist[state]["evening"]
+        let morning_hist = precip_hist[state]["morning"]
+        if(morning_forecast != undefined && evening_forecast != undefined  && evening_hist != undefined && morning_hist != undefined){
             total_precip_scale = total_precip_scale + 100
-            if(true_precip + precision > rain_val  && true_precip - precision < rain_val){
-                precip_scale_val = precip_scale_val + 100
-                if(has_precip == 'true'){
-                    precip_scale_val = precip_scale_val - (100 - precip_prob)
+            for(time of Object.keys(precip_hist[state])){
+                let rain_val = precip_forecast[state][time][0]
+                let precip_prob = precip_forecast[state][time][1]
+                let true_precip = precip_hist[state][time][0]
+                let has_precip = precip_hist[state][time][1]
+                if(true_precip + precision > rain_val  && true_precip - precision < rain_val){
+                    precip_scale_val = precip_scale_val + 100
+                    if(has_precip == 'true'){
+                        precip_scale_val = precip_scale_val - (100 - precip_prob)
+                    }
+                    else{
+                        precip_scale_val = precip_scale_val - precip_prob
+                    }
                 }
                 else{
-                    precip_scale_val = precip_scale_val - precip_prob
-                }
-            }
-            else{
-                if(has_precip == 'true'){
-                    precip_scale_val = precip_scale_val + (100 - precip_prob)
-                }
-                else{
-                    precip_scale_val = precip_scale_val + precip_prob
+                    if(has_precip == 'true'){
+                        precip_scale_val = precip_scale_val + (100 - precip_prob)
+                    }
+                    else{
+                        precip_scale_val = precip_scale_val + precip_prob
+                    }
                 }
             }
         }
@@ -437,40 +517,44 @@ function get_hour_precip_stat(morning, evening, hist, precision, hours){
 
 /*creates a dictionary of precipitation statistics retrieved from the custom forecast and history files based on Accuweather API data*/
 function create_hour_precip_dic(morning_data, evening_data, hist_data, forecast_dic, hist_dic, hours){
-    let data_files_arr = [morning_data, evening_data, hist_data]
+    
     let err = 0
     let precip_dic = {}
     const START_MORNING = 9
     const START_NIGHT = 21
-    const HRS_LATER_MORNING = START_MORNING + hours
-    const HRS_LATER_NIGHT = (START_NIGHT + hours) % 24  
+    const HRS_LATER_MORNING = START_MORNING + parseInt(hours)
+    const HRS_LATER_NIGHT = (START_NIGHT +  parseInt(hours)) % 24  
     let time_of_day = ""
  
-    for(json_data of data_files_arr){
-        for(state of Object.keys(json_data)){
-            if(json_data != hist_data){
-                precip_dic = forecast_dic
-            }
-            else{
-                precip_dic = hist_dic
-            }
-            let loc_code = Object.keys(json_data[state])[0]
-            if(json_data != hist_data && json_data[state][loc_code][hours] != undefined){
-                let morning_forecast = [json_data[state][loc_code][HRS_LATER_MORNING]["RainVal"]["Value"], json_data[state][loc_code][HRS_LATER_MORNING]["PrecipitationProbability"]]
-                let evening_forecast = [json_data[state][loc_code][HRS_LATER_NIGHT]["RainVal"]["Value"], json_data[state][loc_code][HRS_LATER_NIGHT]["PrecipitationProbability"]]
-                precip_dic[state]["morning"] = morning_forecast
-                precip_dic[state]["evening"] = evening_forecast
-            }
-            else if(json_data == hist_data && json_data[state][loc_code][hours] != undefined){
-                let morning_forecast = [json_data[state][loc_code][HRS_LATER_MORNING]["Precipitation"]["Value"], json_data[state][loc_code][HRS_LATER_MORNING]["HasPrecipitation"]]
-                let evening_forecast = [json_data[state][loc_code][HRS_LATER_NIGHT]["Precipitation"]["Value"], json_data[state][loc_code][HRS_LATER_NIGHT]["HasPrecipitation"]]
-                precip_dic[state]["morning"] = morning_forecast
-                precip_dic[state]["evening"] = evening_forecast
-            }
-            else{
-                //console.log(Object.keys(json_data[state]))
-                err++
-            }
+    for(state of Object.keys(hist_data)){
+        let loc_code = Object.keys(hist_data[state])[0]
+        // try{fs.appendFile(
+        //     path.join(__dirname, '/', 'testFunc.txt'),
+        //     JSON.stringify(hist_data[state][loc_code][hours]),
+        //     (err) =>{ })
+        // }catch(err){
+        //     console.log('undefined')
+        // }
+        forecast_dic[state] = {}
+        hist_dic[state] = {}
+        
+        if(hist_data[state][loc_code][HRS_LATER_MORNING] != undefined && hist_data[state][loc_code][HRS_LATER_NIGHT] != undefined && morning_data[state][loc_code][HRS_LATER_MORNING] != undefined && evening_data[state][loc_code][HRS_LATER_NIGHT] != undefined){
+            let morning_forecast = [morning_data[state][loc_code][HRS_LATER_MORNING]["RainVal"]["Value"], morning_data[state][loc_code][HRS_LATER_MORNING]["PrecipitationProbability"]]
+            let evening_forecast = [evening_data[state][loc_code][HRS_LATER_NIGHT]["RainVal"]["Value"], evening_data[state][loc_code][HRS_LATER_NIGHT]["PrecipitationProbability"]]
+            let morning_history = [hist_data[state][loc_code][HRS_LATER_MORNING]["Precipitation"]["Value"], hist_data[state][loc_code][HRS_LATER_MORNING]["HasPrecipitation"]]
+            let evening_history = [hist_data[state][loc_code][HRS_LATER_NIGHT]["Precipitation"]["Value"], hist_data[state][loc_code][HRS_LATER_NIGHT]["HasPrecipitation"]]
+
+            if(morning_forecast != undefined && evening_forecast != undefined && morning_history != undefined && evening_history != undefined ){
+                forecast_dic[state]["morning"] = morning_forecast
+                forecast_dic[state]["evening"] = evening_forecast
+                hist_dic[state]["morning"] = morning_history
+                hist_dic[state]["evening"] = evening_history
+            } 
+        }
+        else{
+            //console.log(Object.keys(json_data[state]))
+            console.log('here')
+            err++
         }
     }
 }

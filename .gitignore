@@ -1,3 +1,6 @@
 node_modules
-media/
 test_code
+media/videos
+test_map.js
+test_map.css
+test_map.html

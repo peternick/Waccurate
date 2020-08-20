@@ -8,6 +8,8 @@ let wacc_json_dic;
 let forecasts_folder_path = './12hr_forecast_data/'
 let historical_data_folder_path = './24hr_historical_data/'
 let file_match_up = {}
+let global_cnt = 0;
+let err_cnt = 0
 
 
 /* reads all history and forecast files from their respective folders and pairs those that contain data that come from the same date*/
@@ -106,7 +108,7 @@ runner()
 async function runner(){
     await match_files()
     wacc_json_dic = await associate_data()
-    console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
+    console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '2'))
     
 }
 
@@ -176,6 +178,8 @@ function get_stat(wacc_json_dic, stat_func, stat_name){
         }
         total_num_vals++
     }
+    console.log(global_cnt)
+    console.log(err_cnt)
     return total_stat_values/total_num_vals
 }
 
@@ -399,7 +403,7 @@ function get_hour_temp_stat(morning, evening, hist, precision, hours){
     let temp_forecast = {}
     let temp_hist = {}
     let temp_scale_val = 0;
-    let total_temp_scale = 1
+    let total_temp_scale = 0
     let temp_score = 0
 
     create_hour_temp_dic(morning, evening, hist, temp_forecast, temp_hist, hours)
@@ -409,12 +413,13 @@ function get_hour_temp_stat(morning, evening, hist, precision, hours){
         let evening_hist = temp_hist[state]["evening"]
         let morning_hist = temp_hist[state]["morning"]
         if(morning_forecast != undefined && evening_forecast != undefined  && evening_hist != undefined && morning_hist != undefined){
-            total_temp_scale = total_temp_scale + 100
+            
             for(time of Object.keys(temp_hist[state])){
+                total_temp_scale = total_temp_scale + 1
                 let temp_val = temp_forecast[state][time]
                 let true_temp = temp_hist[state][time]
                 if(true_temp + precision > temp_val  && true_temp - precision < temp_val){
-                    temp_scale_val = temp_scale_val + 100
+                    temp_scale_val = temp_scale_val + 1
                 }
             }
         }
@@ -433,8 +438,9 @@ function create_hour_temp_dic(morning_data, evening_data, hist_data, forecast_di
     const START_NIGHT = 21
     const HRS_LATER_MORNING = START_MORNING + parseInt(hours)
     const HRS_LATER_NIGHT = (START_NIGHT +  parseInt(hours)) % 24  
- 
+   
     for(state of Object.keys(hist_data)){
+        
         let loc_code = Object.keys(hist_data[state])[0]
         forecast_dic[state] = {}
         hist_dic[state] = {}
@@ -446,6 +452,7 @@ function create_hour_temp_dic(morning_data, evening_data, hist_data, forecast_di
             let evening_history = hist_data[state][loc_code][HRS_LATER_NIGHT]["Temperature"]
 
             if(morning_forecast != undefined && evening_forecast != undefined && morning_history != undefined && evening_history != undefined ){
+                global_cnt++
                 forecast_dic[state]["morning"] = morning_forecast
                 forecast_dic[state]["evening"] = evening_forecast
                 hist_dic[state]["morning"] = morning_history
@@ -455,7 +462,7 @@ function create_hour_temp_dic(morning_data, evening_data, hist_data, forecast_di
         else{
             //console.log(Object.keys(json_data[state]))
             console.log('here')
-            err++
+            err_cnt++
         }
     }
 }
