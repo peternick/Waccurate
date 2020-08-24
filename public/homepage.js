@@ -1,5 +1,41 @@
+/*                  ***title screen animation***            */
+let pageTitle = document.querySelector('#title')
+let subDescription = document.querySelector('#sub-description')
+pageTitle.style.opacity = 0.1;
+subDescription.style.opacity = 0.1;
+let interval = setInterval(fadeIn, 40)
+let i = 0
+function fadeIn(){
+    if(i == 100){
+        clearInterval(interval)
+    }
+    pageTitle.style.opacity = i;
+    subDescription.style.opacity = i;
+    i = i + 0.01;
+}
 
-/*                  *** input area ***                  */
+/*                  ***cloud animation***           */
+let clouds = document.querySelectorAll(".decorative-cloud")
+let cloud_rot_interval = setInterval(animateCloud, 1000)
+let direction_ind = 0;
+function animateCloud(){
+    
+    if(direction_ind == 0){
+        direction_ind++
+        for(cloud of clouds){
+            cloud.style.webkitTransform = "rotate(45deg)"
+        }
+        
+    }
+    else{
+        direction_ind--
+        for(cloud of clouds){
+            cloud.style.webkitTransform = "rotate(-45deg)"
+        }
+    }
+}
+
+/*                  *** input area ***                   */
 function radio_btn_switch(checkbox, parent){
     checkbox.addEventListener('click', click_check);
     function click_check(){
@@ -135,7 +171,7 @@ get_statistic()
 async function get_statistic(){
     //retrieve the raw json weather data created by file_to_json.js
     let wacc_json_dic = {}
-    await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res)
+    await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res);
     //let weather_statistic = document.querySelector('#weather-stat .dropdown-btn .form-control').defaultValue
     console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
 }
@@ -461,7 +497,6 @@ function create_hour_temp_dic(morning_data, evening_data, hist_data, forecast_di
         }
         else{
             //console.log(Object.keys(json_data[state]))
-            console.log('here')
             err++
         }
     }
@@ -553,7 +588,6 @@ function create_hour_precip_dic(morning_data, evening_data, hist_data, forecast_
         }
         else{
             //console.log(Object.keys(json_data[state]))
-            console.log('here')
             err++
         }
     }

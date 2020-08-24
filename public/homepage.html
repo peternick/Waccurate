@@ -14,7 +14,7 @@
     
     <div class="container-fluid" id="super-container">
       <div class="title-bar container-fluid">
-        <video class="vid" autoplay=true loop="loop" width="1581" src="media/videos/waccurate_bg_video.mp4" type="video/mp4" ></video>
+        <video class="vid" muted autoplay="autoplay" loop="true" width="1581" src="media/videos/waccurate_bg_video.mp4" type="video/mp4" ></video>
         <h1 id="title">
           Waccurate
         </h1>
@@ -22,6 +22,11 @@
           Discover how accurate Accuweather truly is in predicting the weather
         </h3>
       </div>
+      <!-- cloud images -->
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
       <!-- main input pane for users to provide parameters for the program-->
       <div id="input-pane">
         <div id='input-box-one'>
@@ -59,7 +64,7 @@
               </div>
             </div>
           </div>
-          <div class="container" id='weather-stat'>
+          <div class="container input-widget" id='weather-stat'>
             <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a weather statistic to show for the whole United States">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" title="What statistic to show for the whole United States" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
                 <div class="dropdown-menu">
@@ -76,7 +81,7 @@
             <div class="input-group flex-nowrap mb-3" id="time-units-group">
               <p class="input-label" id="hours-input-label">Time until prediction:</p>
               
-              <input type="text" class="form-control input-capture" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="number of hours from now until a certain point at which Accuweather makes a weather prediction">
+              <input type="text" class="form-control input-capture" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="Number of hours from now until a certain point at which Accuweather makes a weather prediction. Leave blank to see all times.">
               
             </div>
           </div>
@@ -143,7 +148,7 @@
           </div>
           <div class="container input-widget" id="margin-err">
             <div class="input-group flex-nowrap mb-3" id="time-units-group">
-              <p class="input-label" id="margin-err-label">percentage error:</p>
+              <p class="input-label" id="margin-err-label">Precision:</p>
               <input type="text" class="form-control input-capture" aria-label="Text input with dropdown butto" data-toggle="tooltip" data-placement="top" title="number of hours ">
               
             </div>
@@ -417,7 +422,7 @@
     </div>
     <div class="container output-container">
       <div class="input-group flex-nowrap mb-3">
-        <p class="output-text" id="outputLabel">Weather Statistic Accuracy United States: </p>
+        <p class="result" id="output-label">Weather Statistic Accuracy United States: </p>
         <output class="result"> hi </output>
       </div>
     </div>
@@ -434,7 +439,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="./homepage.css">
-<script type="text/javascript" src="plugins/image-map-resizer/js/imageMapResizer.min.js"></script>  
+<!-- <script type="text/javascript" src="plugins/image-map-resizer/js/imageMapResizer.min.js"></script>   -->
 <script type="text/javascript" src="./homepage.js"></script>
 <!-- <script type="text/javascript" src="./data_retrieval/data_manager.js"></script> -->
 </html>
