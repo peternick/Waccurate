@@ -27,135 +27,146 @@
       <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
       <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
       <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
+      <img class="decorative-cloud" src="media/pictures/map_icons/cloud_transparent.png">
       <!-- main input pane for users to provide parameters for the program-->
-      <div id="input-pane">
-        <div id='input-box-one'>
-          <div class="container input-widget flex-nowrap no-gutters" id="temp-unit-toggle">
-            <div class="input-group flex-nowrap">
-              <p class="input-label" id="addon-wrapping">Temperature:</p>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#fahrenheit-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="fahrenheit-checkbtn">
-                <input class="form-check-input"  id="fahrenheit-checkbox" type="radio" name="temp-btn"checked>
-                <label class="form-check-label" for="fahrenheit">
-                  Fahrenheit
-                </label>
-              </div>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#celsius-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="celsius-checkbtn">
-                <input class="form-check-input"  id="celsius-checkbox" type="radio" name="temp-btn">
-                <label class="form-check-label" for="celsius">
-                  Celsius
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="container input-widget flex-nowrap" id="weather-icons-toggle">
-            <div class="input-group flex-nowrap" id="weather-icons-group">
-              <p class="input-label" id="addon-wrapping">Displayed map weather icons:</p>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#temperature-checkbtn'), document.querySelector('#weather-icons-group'))" id="temperature-checkbtn">
-                <input class="form-check-input"  id="temp-checkbox" type="radio" name="weather-btn"checked>
-                <label class="form-check-label" for="temp">
-                  Temperature
-                </label>
-              </div>
-              <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#weather-checkbtn'), document.querySelector('#weather-icons-group'))" id="weather-checkbtn">
-                <input class="form-check-input"  id="weather-checkbox" type="radio" name="weather-btn">
-                <label class="form-check-label" for="weather">
-                  Weather
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="container input-widget" id='weather-stat'>
-            <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a weather statistic to show for the whole United States">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" title="What statistic to show for the whole United States" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item">Temperature</a>
-                  <a class="dropdown-item">Precipitation</a>
-                  <a class="dropdown-item">Weather</a>
+      <div class="input-container">
+        <div id="input-pane">
+          <div id='input-box-one'>
+            <div class="container input-widget flex-nowrap no-gutters" id="temp-unit-toggle">
+              <div class="input-group flex-nowrap">
+                <p class="input-label" id="addon-wrapping">Temperature:</p>
+                <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#fahrenheit-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="fahrenheit-checkbtn">
+                  <input class="form-check-input"  id="fahrenheit-checkbox" type="radio" name="temp-btn"checked>
+                  <label class="form-check-label" for="fahrenheit">
+                    Fahrenheit
+                  </label>
                 </div>
-                <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
-            </div>
-          </div>
-        </div>
-        <div id='input-box-two'>
-          <div class="container input-widget">
-            <div class="input-group flex-nowrap mb-3" id="time-units-group">
-              <p class="input-label" id="hours-input-label">Time until prediction:</p>
-              
-              <input type="text" class="form-control input-capture" aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="Number of hours from now until a certain point at which Accuweather makes a weather prediction. Leave blank to see all times.">
-              
-            </div>
-          </div>
-          <div class="container input-widget" id="states-dropdown">
-            <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a state to see specific statistics">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region (optional)</button>
-                <div class="dropdown-menu">
-                  <select size="5" id="mySelect" style="width:150px;color:#222350;">
-                    <option value="">Alabama</option>
-                    <option value="">Alaska</option>
-                    <option value="">Arizona</option>
-                    <option value="">Arkansas</option>
-                    <option value="">California</option>
-                    <option value="">Connecticut</option>
-                    <option value="">Colorado</option>
-                    <option value="">Delaware</option>
-                    <option value="">Florida</option>
-                    <option value="">Georgia</option>
-                    <option value="">Hawaii</option>
-                    <option value="">Idaho</option>
-                    <option value="">Illinois</option>
-                    <option value="">Indiana</option>
-                    <option value="">Iowa</option>
-                    <option value="">Kansas</option>
-                    <option value="">Kentukcy</option>
-                    <option value="">Louisiana</option>
-                    <option value="">Maine</option>
-                    <option value="">Maryland</option>
-                    <option value="">Massachusetts</option>
-                    <option value="">Michigan</option>
-                    <option value="">Minesota</option>
-                    <option value="">Mississippi</option>
-                    <option value="">Missouri</option>
-                    <option value="">Montana</option>
-                    <option value="">Nebraska</option>
-                    <option value="">Nevada</option>
-                    <option value="">New Hampshire</option>
-                    <option value="">New Jersey</option>
-                    <option value="">New York</option>
-                    <option value="">New Mexico</option>
-                    <option value="">North Carolina</option>
-                    <option value="">North Dakota</option>
-                    <option value="">Ohio</option>
-                    <option value="">Oklahoma</option>
-                    <option value="">Oregon</option>
-                    <option value="">Pennsylvania</option>
-                    <option value="">Rhode Island</option>
-                    <option value="">South Carolina</option>
-                    <option value="">South Dakota</option>
-                    <option value="">Tennessee</option>
-                    <option value="">Texas</option>
-                    <option value="">Utah</option>
-                    <option value="">Vermont</option>
-                    <option value="">Virginia</option>
-                    <option value="">Washington</option>
-                    <option value="">West Virginia</option>
-                    <option value="">Wisconsin</option>
-                    <option value="">Wyoming</option>
-                </select>
+                <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#celsius-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="celsius-checkbtn">
+                  <input class="form-check-input"  id="celsius-checkbox" type="radio" name="temp-btn">
+                  <label class="form-check-label" for="celsius">
+                    Celsius
+                  </label>
                 </div>
-                <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
+              </div>
+            </div>
+            <div class="container input-widget">
+              <div class="input-group flex-nowrap mb-3" id="time-units-group">
+                <p class="input-label" id="hours-input-label">Time until prediction:</p>
                 
+                <input type="text" class="form-control input-capture mr-3" id='prediciton-time-input' aria-label="Text input with dropdown button" data-toggle="tooltip" data-placement="top" title="Number of hours from now until a certain point at which Accuweather makes a weather prediction. Leave blank to see all times.">
+                <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#all-checkbtn'), document.querySelector('#temp-unit-toggle'))" id="all-checkbtn">
+                  <input class="form-check-input"  id="all-checkbox" type="radio" name="all-btn">
+                  <label class="form-check-label" for="prediction-time">
+                    All
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="container input-widget" id='weather-stat'>
+              <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a weather statistic to show for the whole United States">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-offset="viewport" data-toggle="dropdown" title="What statistic to show for the whole United States" aria-haspopup="true" aria-expanded="false">Weather Statistic</button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item">Temperature</a>
+                    <a class="dropdown-item">Precipitation</a>
+                    <a class="dropdown-item">Weather</a>
+                  </div>
+                  <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
+              </div>
             </div>
           </div>
-          <div class="container input-widget" id="margin-err">
-            <div class="input-group flex-nowrap mb-3" id="time-units-group">
-              <p class="input-label" id="margin-err-label">Precision:</p>
-              <input type="text" class="form-control input-capture" aria-label="Text input with dropdown butto" data-toggle="tooltip" data-placement="top" title="number of hours ">
-              
+          <div id='input-box-two'>
+            <div class="container input-widget flex-nowrap no-gutters" id="precip-unit-toggle">
+              <div class="input-group flex-nowrap">
+                <p class="input-label" id="addon-wrapping">Precipitation:</p>
+                <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#inches-checkbtn'), document.querySelector('#precip-unit-toggle'))" id="inches-checkbtn">
+                  <input class="form-check-input"  id="inches-checkbox" type="radio" name="precip-btn"checked>
+                  <label class="form-check-label" for="inches">
+                    Inches
+                  </label>
+                </div>
+                <div class="form-check-inline" onmouseenter="radio_btn_switch(document.querySelector('#milimeters-checkbtn'), document.querySelector('#precip-unit-toggle'))" id="milimeters-checkbtn">
+                  <input class="form-check-input"  id="milimeters-checkbox" type="radio" name="precip-btn">
+                  <label class="form-check-label" for="milimeters">
+                    Milimeters
+                  </label>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="container" id='ok-btn-container'>
-            <div class="input-group flex-nowrap mb-3">
-              <button type="button" class="btn btn-success" id="ok-btn"> Calculate </button>
+          
+            <div class="container input-widget" id="states-dropdown">
+              <div class="dropdown-btn input-group flex-nowrap mb-3" data-toggle="tooltip" title="choose a state to see specific statistics">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/region (optional)</button>
+                  <div class="dropdown-menu">
+                    <select size="5" id="mySelect" style="width:150px;color:#222350;">
+                      <option value="">Alabama</option>
+                      <option value="">Alaska</option>
+                      <option value="">Arizona</option>
+                      <option value="">Arkansas</option>
+                      <option value="">California</option>
+                      <option value="">Connecticut</option>
+                      <option value="">Colorado</option>
+                      <option value="">Delaware</option>
+                      <option value="">Florida</option>
+                      <option value="">Georgia</option>
+                      <option value="">Hawaii</option>
+                      <option value="">Idaho</option>
+                      <option value="">Illinois</option>
+                      <option value="">Indiana</option>
+                      <option value="">Iowa</option>
+                      <option value="">Kansas</option>
+                      <option value="">Kentukcy</option>
+                      <option value="">Louisiana</option>
+                      <option value="">Maine</option>
+                      <option value="">Maryland</option>
+                      <option value="">Massachusetts</option>
+                      <option value="">Michigan</option>
+                      <option value="">Minesota</option>
+                      <option value="">Mississippi</option>
+                      <option value="">Missouri</option>
+                      <option value="">Montana</option>
+                      <option value="">Nebraska</option>
+                      <option value="">Nevada</option>
+                      <option value="">New Hampshire</option>
+                      <option value="">New Jersey</option>
+                      <option value="">New York</option>
+                      <option value="">New Mexico</option>
+                      <option value="">North Carolina</option>
+                      <option value="">North Dakota</option>
+                      <option value="">Ohio</option>
+                      <option value="">Oklahoma</option>
+                      <option value="">Oregon</option>
+                      <option value="">Pennsylvania</option>
+                      <option value="">Rhode Island</option>
+                      <option value="">South Carolina</option>
+                      <option value="">South Dakota</option>
+                      <option value="">Tennessee</option>
+                      <option value="">Texas</option>
+                      <option value="">Utah</option>
+                      <option value="">Vermont</option>
+                      <option value="">Virginia</option>
+                      <option value="">Washington</option>
+                      <option value="">West Virginia</option>
+                      <option value="">Wisconsin</option>
+                      <option value="">Wyoming</option>
+                  </select>
+                  </div>
+                  <input type="text" class="form-control output-display" aria-label="Text input with dropdown button" disabled='true'>
+                  
+              </div>
+            </div>
+            <div class="container input-widget" id="margin-err">
+              <div class="filter" id="grayed-out-container" data-toggle="tooltip" title="Cannot access this when the chosen weather statistic isn't numerical">
+              </div>
+              <div class="input-group flex-nowrap mb-3" id="precision-container">
+                <p class="input-label" id="margin-err-label">Precision:</p>
+                <input type="text" class="form-control input-capture" id="precision-input" aria-label="Text input with dropdown butto" data-toggle="tooltip" data-placement="top" title="The precision ">
+              </div>
+            </div>
+            <div class="container" id='ok-btn-container'>
+              <div class="input-group flex-nowrap mb-3">
+                <button type="button" class="btn btn-success" id="ok-btn"> Calculate </button>
+              </div>
             </div>
           </div>
         </div>
@@ -423,7 +434,7 @@
     <div class="container output-container">
       <div class="input-group flex-nowrap mb-3">
         <p class="result" id="output-label">Weather Statistic Accuracy United States: </p>
-        <output class="result"> hi </output>
+        <output class="result" id="output-text"> hi </output>
       </div>
     </div>
   </body>

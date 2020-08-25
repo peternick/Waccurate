@@ -82,14 +82,21 @@ function parse_coords(coord_string){
 
 /*populates label for weather statistic selection on the homepage*/
 var drop = document.querySelector('.dropdown-menu')
-console.log(drop.children)
     for(option of drop.children){
         option.onclick = function (option){
             let output = document.querySelector('#weather-stat .dropdown-btn .form-control')
             output.defaultValue = option.srcElement.innerText
+            let filter = document.querySelector("#grayed-out-container");
+            if(option.srcElement.innerText != "Weather"){
+                filter.style.display = "none";
+            }
+            else{
+                filter.style.display = "initial";
+            }
         }
     }
-
+console.log(window.innerWidth)
+console.log(window.outerWidth)
 /*populates label for state selection*/
 var drpdn_options = document.querySelector('#mySelect')
 drpdn_options.onchange = function() {
@@ -104,9 +111,18 @@ function populate_state_box(option){
     drpdwn_output.defaultValue = option
 }
 
+
+
+
 /* calculates statistics with the options specified by the user */
-let calculate_btn = document.querySelector('#ok-btn-container .input-group .btn')
-calculate_btn.addEventListener('click', get_statistic)
+let calculate_btn = document.querySelector('#ok-btn-container')
+let precision = document.querySelector('#precision-input').value
+let prediction_time = document.querySelector('#prediciton-time-input').value
+calculate_btn.addEventListener('click', function() {
+    let precision = document.querySelector('#precision-input').value
+    let prediction_time = document.querySelector('#prediciton-time-input').value
+    get_statistic(precision, prediction_time)
+} )
 
 
 /*                       *** map ***                              */
@@ -167,13 +183,18 @@ var state_areas = bg_map.children;
 
 /******                                                    ***DATA MANAGER***           *********/
 
-get_statistic()
-async function get_statistic(){
+
+async function get_statistic(precision, hours){
+
+    precision = parseInt(precision)
+    console.log(precision)
     //retrieve the raw json weather data created by file_to_json.js
     let wacc_json_dic = {}
     await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res);
+    let output = document.querySelector('#output-text')
+    output.innerText = get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", precision, hours)
     //let weather_statistic = document.querySelector('#weather-stat .dropdown-btn .form-control').defaultValue
-    console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
+    // console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
 }
 
 

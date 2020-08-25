@@ -1,3 +1,7 @@
+body{
+    min-width: 600px;
+}
+
 /*                  *** title bar ***               */
 .title-bar{
     margin-left: 1px;
@@ -40,14 +44,18 @@
     transform: rotate(45deg);
 }
 .decorative-cloud:first-of-type{
-    margin-left: 20vw;
+    margin-left: 3vw;
 }
 
 /*                  *** input ***                   */
+.input-container{
+    width: 100%;
+    /* border: solid green;    */
+}
 #input-pane{
     padding: 1vw;
     margin-top: 5vw;
-    width: 90vw;
+    width: 86vw;
     margin-left: 5vw;
     background-color: rgb(39, 114, 226);
     border-radius: 3em 0em;
@@ -61,11 +69,10 @@
     border-image-repeat: repeat;
     border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
     background: rgb(4, 180, 250);
+    position: relative;
 }
 #input-box-one .container{
-    
 
-    margin-left: 2vw;
     min-width: fit-content;
     padding-top: 0.6em
 }
@@ -116,14 +123,14 @@ input[disabled='true']{
 }
 #input-box-one{
     display: grid;
-    grid-template-columns: 32% 42% 25%;
+    grid-template-columns: 30% 40% 30%;
     border: dashed;
     border-color: yellow;
     margin-bottom: 1em;
 }
 #input-box-two{
     display: grid;
-    grid-template-columns: 30% 34% 23% 10%;
+    grid-template-columns: 30% 30% 28% 10%;
     border: dashed;
     border-color: yellow;
 }
@@ -131,7 +138,7 @@ input[disabled='true']{
     margin-left: 1em;
 }
 #ok-btn{
-    margin-top: 0.5em;
+    margin-top: 1em;
     padding-left: 1em;
 }
 #outputLabel{
@@ -142,6 +149,16 @@ input[disabled='true']{
     margin-left: 2em;
     font-family: 'Poppins';
     font-size: 2em;
+}
+#grayed-out-container{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.8;
+    z-index: 40;
+    right: 0px;
+    bottom: 0px;
 }
 
 
