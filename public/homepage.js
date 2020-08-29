@@ -82,19 +82,19 @@ function parse_coords(coord_string){
 
 /*populates label for weather statistic selection on the homepage*/
 var drop = document.querySelector('.dropdown-menu')
-    for(option of drop.children){
-        option.onclick = function (option){
-            let output = document.querySelector('#weather-stat .dropdown-btn .form-control')
-            output.defaultValue = option.srcElement.innerText
-            let filter = document.querySelector("#grayed-out-container");
-            if(option.srcElement.innerText != "Weather"){
-                filter.style.display = "none";
-            }
-            else{
-                filter.style.display = "initial";
-            }
+for(option of drop.children){
+    option.onclick = function (option){
+        let output = document.querySelector('#weather-stat .dropdown-btn .form-control')
+        output.defaultValue = option.srcElement.innerText
+        let filter = document.querySelector("#grayed-out-container");
+        if(option.srcElement.innerText != "Weather"){
+            filter.style.display = "none";
+        }
+        else{
+            filter.style.display = "initial";
         }
     }
+}
 console.log(window.innerWidth)
 console.log(window.outerWidth)
 /*populates label for state selection*/
@@ -112,16 +112,12 @@ function populate_state_box(option){
 }
 
 
-
-
 /* calculates statistics with the options specified by the user */
 let calculate_btn = document.querySelector('#ok-btn-container')
-let precision = document.querySelector('#precision-input').value
-let prediction_time = document.querySelector('#prediciton-time-input').value
 calculate_btn.addEventListener('click', function() {
     let precision = document.querySelector('#precision-input').value
     let prediction_time = document.querySelector('#prediciton-time-input').value
-    get_statistic(precision, prediction_time)
+    get_statistic(parseInt(precision), prediction_time)
 } )
 
 
@@ -129,7 +125,7 @@ calculate_btn.addEventListener('click', function() {
 /*  draws the outline of a state */
 function state_hovered(state_img, state_area){
     state_img.style.position = "absolute";
-            state_img.style.width = "1410px"
+            state_img.style.width = "88vw"
             state_img.style.height = "705px"
             state_img.style.marginLeft = "5vw";
             state_img.style.marginTop = "3vw";
@@ -145,7 +141,7 @@ function state_hovered(state_img, state_area){
     $(state_area).hover(function hovering(){       
             hovd = true
             state_img.style.position = "absolute";
-            state_img.style.width = "1410px"
+            state_img.style.width = "88vw"
             state_img.style.height = "705px"
             state_img.style.marginLeft = "5vw";
             state_img.style.marginTop = "3vw";
@@ -185,14 +181,30 @@ var state_areas = bg_map.children;
 
 
 async function get_statistic(precision, hours){
-
-    precision = parseInt(precision)
-    console.log(precision)
+    
     //retrieve the raw json weather data created by file_to_json.js
     let wacc_json_dic = {}
     await fetch("/wacc_json_data").then((res) => res.json()).then((res) => wacc_json_dic = res);
+
     let output = document.querySelector('#output-text')
-    output.innerText = get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", precision, hours)
+    let outputContainer = document.querySelector('.output-container')
+    let weatherStat = document.querySelector('#weather-stat .dropdown-btn .form-control')
+    let outputLabel = document.querySelector('#output-label')
+    outputLabel.innerHTML = "Accuracy of " + weatherStat.defaultValue + " prediction within " + hours + " hours: "
+    outputContainer.style.opacity = "1";
+
+    let stat_name = weatherStat.value
+    let timesAllCheckbx = document.querySelector("#times-all-checkbox")
+
+    if(timesAllCheckbx.attributes.name.ownerElement.checked == false){
+        
+    }
+    else{
+        hours = "all"
+    }
+    
+    output.innerText = get_stat(wacc_json_dic, stat_name, precision, hours)
+    output.innerText =  Math.round(output.innerText * 100) + "%";
     //let weather_statistic = document.querySelector('#weather-stat .dropdown-btn .form-control').defaultValue
     // console.log(get_stat(wacc_json_dic, get_hour_temp_stat, "Hour_Temperature", 2, '3'))
 }
@@ -202,33 +214,33 @@ async function get_statistic(precision, hours){
 //wacc_json_dic: a dictionary with a key of a custom history file and a value of an array of javascript objects representing Accuweather in a custom format; fetched from file_to_json.js
 //stat_func: a function that returns a certain weather related statistic
 //stat_name: the name of the weather statistic whose data is being retrieved
-function get_stat(wacc_json_dic, stat_func, stat_name){
+function get_stat(wacc_json_dic, stat_name){
     let total_stat_values = 0
     let total_num_vals = 0
     for(hist_file of Object.keys(wacc_json_dic)){
         let morning = wacc_json_dic[hist_file][0]
         let evening = wacc_json_dic[hist_file][1]
         let hist =  wacc_json_dic[hist_file][2]
-        let func = stat_func
+        let func = ""
         if(stat_name == 'Temperature' || stat_name == "RealFeelTemperature"){
-            let precision = arguments[3]
-            let hours = arguments[4]
-            func = stat_func( morning, evening, hist, stat_name, precision, hours)
+            let precision = arguments[2]
+            let hours = arguments[3]
+            func = get_temp_stat( morning, evening, hist, stat_name, precision, hours)
         }
         else if(stat_name == 'Precipitation'){
-            let precision = arguments[3]
-            func = stat_func(morning, evening, hist, precision)
+            let precision = arguments[2]
+            func = get_precip_stat(morning, evening, hist, precision)
         }
         else if(stat_name == 'Weather'){
-            func = stat_func(morning, evening, hist)
+            func = get_weather_stat(morning, evening, hist)
         }
         else if(stat_name == "Hour_Temperature"){
-            let precision = arguments[3]
-            let hour = arguments[4]
-            func = stat_func(morning, evening, hist, precision, hour)
+            let precision = arguments[2]
+            let hour = arguments[3]
+            func = get_hour_temp_stat(morning, evening, hist, precision, hour)
         }
         else if(stat_name == "Hour_Precip"){
-            func = stat_func(morning, evening, hist, arguments[3], arguments[4])
+            func = get_hour_precip_stat(morning, evening, hist, arguments[2], arguments[3])
         }
         
         if(isNaN(func)){

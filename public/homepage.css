@@ -165,7 +165,7 @@ input[disabled='true']{
 
 /*                  *** map ***                 */
 #background-map-id{
-    width: 1410px;
+    width: 88vw;
     height: 705px;
     margin-left: 5vw;
     margin-top: 3vw;
@@ -174,7 +174,7 @@ input[disabled='true']{
     border-width: 1em;
     border-color: maroon;
 }
-.maps{
+.img-overlay{
     display:none;
 }
 /*canvas{
@@ -189,6 +189,7 @@ body{
 
 
 .output-container{
+    opacity: 0;
     border: solid;
     border-width: 2px;
     background-color: orange;

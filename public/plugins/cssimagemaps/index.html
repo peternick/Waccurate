@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CSS Image Maps</title>
+<style type="text/css">
+
+#container {
+	width: 580px;
+	height: 268px;
+	margin: 0 auto;
+}
+
+ul#continents2, ul#continents3 {
+	list-style: none;
+	width: 580px;
+	height: 268px;
+	position: relative;
+	background: url(images/map.png) no-repeat 0 0;
+}
+
+ul#continents1 li, ul#continents2 li, ul#continents3 li {
+	position: absolute;
+}
+
+.northamerica {
+	width: 200px;
+	height: 142px;
+	top: 2px;
+	left: 0px;
+}
+
+.southamerica {
+	width: 108px;
+	height: 130px;
+	top: 131px;
+	left: 76px;
+}
+
+.africa {
+	width: 120px;
+	height: 140px;
+	top: 83px;
+	left: 209px;
+}
+
+.europe {
+	width: 120px;
+	height: 84px;
+	top: 1px;
+	left: 211px;
+}
+
+.asia {
+	width: 215px;
+	height: 175px;
+	top: 1px;
+	left: 283px;
+}
+
+.australia {
+	width: 114px;
+	height: 95px;
+	top: 152px;
+	left: 432px;
+}
+
+ul#continents1 li a, ul#continents2 li a, ul#continents3 li a  {
+	display: block;
+	outline: none;
+	height: 100%;
+}
+
+ul#continents1 li a, ul#continents2 li a  {
+	text-indent: -9000px;
+}
+
+ul#continents2 li a:hover, ul#continents3 li a:hover {
+	background: url(images/map.png) no-repeat 0 0;	
+}
+
+ul#continents2 li.northamerica a:hover, ul#continents3 li.northamerica a:hover {
+	background-position: 0px -270px;
+}
+
+ul#continents2 li.southamerica a:hover, ul#continents3 li.southamerica a:hover {
+	background-position: -226px -273px;
+}
+
+ul#continents2 li.africa a:hover, ul#continents3 li.africa a:hover {
+	background-position: -209px -417px;
+}
+
+ul#continents2 li.europe a:hover, ul#continents3 li.europe a:hover {
+	background-position: -22px -427px;
+}
+
+ul#continents2 li.asia a:hover, ul#continents3 li.asia a:hover {
+	background-position: -363px -268px;
+}
+
+ul#continents2 li.australia a:hover, ul#continents3 li.australia a:hover {
+	background-position: -412px -455px;
+}
+
+</style>
+</head>
+
+<body>
+More script and css style
+:
+<div id="container">
+
+	<h1><a href="http://www.noobcube.com/tutorials/html-css/css-image-maps-a-beginners-guide-/" title="Visit the Noobcube Tutorial on CSS Image Maps">CSS Image Map w/Hover States</a>		</h1>
+    <ul id="continents2">
+        <li class="northamerica"><a href="http://en.wikipedia.org/wiki/North_America">North America</a></li>
+        <li class="southamerica"><a href="http://en.wikipedia.org/wiki/South_America">South America</a></li>    
+        <li class="asia"><a href="http://en.wikipedia.org/wiki/Asia">Asia</a></li>
+        <li class="australia"><a href="http://en.wikipedia.org/wiki/Australia">Australia</a></li>
+
+        <li class="africa"><a href="http://en.wikipedia.org/wiki/Africa">Africa</a></li>
+        <li class="europe"><a href="http://en.wikipedia.org/wiki/Europe">Europe</a></li>    
+	</ul>
+	
+
+</div>
+</body>
+</html>
