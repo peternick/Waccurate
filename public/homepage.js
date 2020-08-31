@@ -169,9 +169,35 @@ function state_hovered(state_img, state_area){
 
 
 /*              *** icons map overlay ***               */
-var bg_map = document.querySelector('#background-map')
-var state_areas = bg_map.children;
-//console.log(state_areas)
+let map_cont = document.querySelector(".map-container")
+let map_fg_areas = document.querySelectorAll(".map-container map area")
+let map_bg_img = document.querySelector("#background-map-id")
+for(area of map_fg_areas){
+
+    let ar = area
+    ar.onclick = function(){
+        let state_name = ar.getAttribute("id")
+        let state_img = document.createElement("img")
+
+        map_bg_img.style.display = "none"
+        map_cont.append(state_img)
+        state_img.setAttribute("src", "./states/" + state_name + ".png")
+        // console.log(ar.attributes.href)
+        ar.setAttribute("href", "#" + state_name)
+        console.log(ar.attributes.href)
+        console.log(state_img.attributes.src)
+        state_img.style.width = "88vw"
+        state_img.style.height = "705px"
+        state_img.style.marginLeft = "5vw";
+        state_img.style.marginTop = "3vw";
+        state_img.style.zIndex = "20";
+        state_img.style.display = "initial";
+        state_img.style.border = "ridge";
+        state_img.style.borderRadius = "4em";
+        state_img.style.borderWidth = "1em";
+        state_img.style.borderColor = "maroon"
+    }
+}
 
 
 

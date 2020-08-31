@@ -48,6 +48,12 @@ body{
 }
 
 /*                  *** input ***                   */
+label{
+    font-family: Poppins;
+}
+p{
+    font-family: Kanit;
+}
 .input-container{
     width: 100%;
     /* border: solid green;    */
@@ -65,9 +71,9 @@ body{
 }
 .input-widget{
     border: 3px solid transparent;
+    border-radius: 1em;
     max-width: fit-content;
-    border-image-repeat: repeat;
-    border-image: url('./media/pictures/creative_commons_mandala_79_by_onojk123-db476qw.png') 10 round;
+    border-color: rgba(194, 25, 25, 0.575);
     background: rgb(4, 180, 250);
     position: relative;
 }
@@ -124,15 +130,12 @@ input[disabled='true']{
 #input-box-one{
     display: grid;
     grid-template-columns: 30% 40% 30%;
-    border: dashed;
-    border-color: yellow;
     margin-bottom: 1em;
 }
 #input-box-two{
     display: grid;
     grid-template-columns: 30% 30% 28% 10%;
-    border: dashed;
-    border-color: yellow;
+
 }
 #ok-btn-container{
     margin-left: 1em;
