@@ -123,6 +123,7 @@ calculate_btn.addEventListener('click', function() {
 
 /*                       *** map ***                              */
 /*  draws the outline of a state */
+
 function state_hovered(state_img, state_area){
     state_img.style.position = "absolute";
             state_img.style.width = "88vw"
@@ -168,7 +169,7 @@ function state_hovered(state_img, state_area){
 
 
 
-/*              *** icons map overlay ***               */
+/*              *** Display individual states ***               */
 let map_cont = document.querySelector(".map-container")
 let map_fg_areas = document.querySelectorAll(".map-container map area")
 let map_bg_img = document.querySelector("#background-map-id")
@@ -178,13 +179,18 @@ for(area of map_fg_areas){
     ar.onclick = function(){
         let state_name = ar.getAttribute("id")
         let state_img = document.createElement("img")
+        let state_overlay_imgs = document.querySelectorAll('.img-overlay')
+
+        for(overlay_state of state_overlay_imgs){
+            overlay_state.style.display = "none"
+        }
 
         map_bg_img.style.display = "none"
         map_cont.append(state_img)
         state_img.setAttribute("src", "./states/" + state_name + ".png")
         // console.log(ar.attributes.href)
         ar.setAttribute("href", "#" + state_name)
-        console.log(ar.attributes.href)
+        console.log(ar.attributes)
         console.log(state_img.attributes.src)
         state_img.style.width = "88vw"
         state_img.style.height = "705px"
@@ -198,6 +204,8 @@ for(area of map_fg_areas){
         state_img.style.borderColor = "maroon"
     }
 }
+/* back button functionality */
+
 
 
 

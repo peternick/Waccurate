@@ -2,7 +2,7 @@ body{
     min-width: 600px;
 }
 
-/*                  *** title bar ***               */
+/*                  *** TITLE BAR ***               */
 .title-bar{
     margin-left: 1px;
     padding: 0em;
@@ -29,14 +29,14 @@ body{
     text-shadow: 0px 2px 1px darkblue, 2px 0px 1px darkblue, -2px 0px 1px darkblue, 0px -2px 1px darkblue;
 }
 
-/*                  *** container for whole body ***                */
+/*                  *** CONTAINER FOR BODY ***                */
 #super-container{
  
     padding: 0em;
 }
 
 
-/*                  *** decorative cloud             */
+/*                  *** DECORATIVE CLOUD ***             */
 .decorative-cloud{
     width: 7vw;
     margin-left: 10vw;
@@ -47,7 +47,7 @@ body{
     margin-left: 3vw;
 }
 
-/*                  *** input ***                   */
+/*                  *** USER INPUT ***                   */
 label{
     font-family: Poppins;
 }
@@ -83,9 +83,6 @@ p{
     padding-top: 0.6em
 }
 #input-box-two .input-widget{
-
-
-    margin-left: 2vw;
     min-width: fit-content;
     padding-top: 0.6em
 }
@@ -134,7 +131,7 @@ input[disabled='true']{
 }
 #input-box-two{
     display: grid;
-    grid-template-columns: 30% 30% 28% 10%;
+    grid-template-columns: 35.5% 34% 16% 10%;
 
 }
 #ok-btn-container{
@@ -166,7 +163,7 @@ input[disabled='true']{
 
 
 
-/*                  *** map ***                 */
+/*                  *** MAP ***                 */
 #background-map-id{
     width: 88vw;
     height: 705px;
@@ -212,4 +209,20 @@ body{
 .vid{
     border-bottom: solid indigo;
     border-width: 1em;
+}
+
+
+
+/*              BOTTOM PAGE FOOTER          */
+.bottom-page-footer{
+    border: solid black;
+    display: inline-flex;
+    background-color: honeydew;
+}
+.bottom-page-footer p{
+    margin-left: 30%;
+}
+#AccuweatherLogo{
+    width: 20%;
+    margin-left: 12%;
 }
