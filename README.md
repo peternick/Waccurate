@@ -17,7 +17,12 @@ that still needs to be included is:
 Those are just a few of the more major things I would like to get to at some point.
 
 The weather data I used for this map comes from the Accuweather API and was collected over a one month period. That means the results that are displayed once 
-a user gives appropriate inputs to the program <b>Are not completely accurate</b>. To collect enough data to make the percentage accuracy predictions
+a user gives appropriate inputs to the program <b>are not completely accurate</b>. To collect enough data to make the percentage accuracy predictions
 given by the program plausible would take a lot of money (The Accuweather API costs money) and time (since I had to manually run my program everyday at a specific 
 time in order to keep my data organized). The data is stored in text files in the form of JSON objects. The raw data retrieved from the Accuweather API had its own JSON 
 format, which I had modified so that my program could read the data more efficiently and so that redundant data was omitted. 
+
+
+<h1> How It Works </h1>
+<h2> Input Area </h2>
+The input area allows for the user to specify what kind of weather data they would like to see. The <em> Time Until Prediction </em> box allows the user to see the accuracy of an average weather prediction after a specified number of hours. If the user wants a true accuracy average they can click the <em> all </em> button for all time frames. The second input box is a dropdown menu containing three values: temperature, weather, and precipitation. This is what specific statistic the program is going to find the accuracy for. On the third button the user can optionally choose which state they would like to see accuracy predictions for. If a user chooses a state from the dropdown menu of this button, the output will only display accuracy percentages for the average of all cities in that state. Note, only the accuracy of the capital cities of each state can be shown since it would take a very long time to get the data of multiple cities. Both the <em>Precipitation</em> and <em>Temperature</em> boxes reference the <em>Precision</em> box in that the user must choose which units to use for the precision of what an accurate temperature or precipitation amount would be. The <em>Precision</em> box will only be available if the weather statistic under consideration is measured in numerical units (like temperature and precipitation).
