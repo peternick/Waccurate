@@ -50,7 +50,7 @@ function radio_btn_switch(checkbox, parent){
             }
         }
         for(ele of checkbox.children){
-            console.log(ele)
+            // console.log(ele)
             if(ele.getAttribute('class') == 'form-check-input'){
                 ele.checked = true;
                 checkbox.style.borderColor = "grey";
@@ -95,8 +95,8 @@ for(option of drop.children){
         }
     }
 }
-console.log(window.innerWidth)
-console.log(window.outerWidth)
+// console.log(window.innerWidth)
+// console.log(window.outerWidth)
 /*populates label for state selection*/
 var drpdn_options = document.querySelector('#mySelect')
 drpdn_options.onchange = function() {
@@ -303,13 +303,10 @@ function get_temp_stat(morning, evening, hist, temp_stat, precision, forecast_ho
     let real_feel_percentage = 0
 
     create_temp_dic(temp_stat, morning, evening, hist, temp_forecast, temp_hist, forecast_hour)
-    //console.log('new')
     for(state of Object.keys(temp_hist)){
-        //console.log('her it is bois')
         for(hour of Object.keys(temp_hist[state])){
             let hist_temp_val = temp_hist[state][hour]
             let forecast_temp_val = temp_forecast[state][hour]
-            //console.log(forecast_temp_val)
             if(forecast_temp_val != undefined && hist_temp_val != undefined){
                 let difference = Math.abs(forecast_temp_val - hist_temp_val)
                 if(difference <= precision){
@@ -372,9 +369,6 @@ function create_temp_dic(temp_stat, morning_data, evening_data, hist_data, forec
                 temp_dic[state] = {}
                 temp_dic[state][hr] = json_data[state][loc_code][hr][temp_stat]
             }
-            else{
-                console.log('damn')
-            }
         }
     }
 }
@@ -396,7 +390,6 @@ function get_precip_stat(morning, evening, hist, precision){
                 let rain_val = precip_forecast[state][hour][0]
                 let precip_prob = precip_forecast[state][hour][1]
                 // console.log(precip_hist[state])
-                // console.log('here' + hour)
                 let true_precip = precip_hist[state][hour][0]
                 let has_precip = precip_hist[state][hour][1]
                 total_precip_scale = total_precip_scale + 100
