@@ -191,6 +191,7 @@ body{
 .output-container{
     opacity: 0;
     border: solid;
+    border-radius: 2em;
     border-width: 2px;
     background-color: orange;
     margin-top: 1em;
