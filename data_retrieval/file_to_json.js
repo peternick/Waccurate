@@ -5,8 +5,8 @@ const express = require('express')
 
 //globals
 let wacc_json_dic;
-let forecasts_folder_path = './12hr_forecast_data/'
-let historical_data_folder_path = './24hr_historical_data/'
+let forecasts_folder_path = path.join(__dirname, './12hr_forecast_data/')
+let historical_data_folder_path = path.join(__dirname,'./24hr_historical_data/')
 let file_match_up = {}
 
 
@@ -89,7 +89,7 @@ async function parse_file_text(text_data, history_file, period){
         folder_path = historical_data_folder_path
     }
     return await new Promise((resolve, reject) =>{
-        fs.readFile(path.join(__dirname, folder_path  + text_data), "utf8", (err, file_text) => {
+        fs.readFile(path.join(folder_path  + text_data), "utf8", (err, file_text) => {
             if(err) {
                 reject(err)
                 return;

@@ -1,163 +1,116 @@
 /*! Image Map Resizer
  *  Desc: Resize HTML imageMap to scaled image.
- *  Copyright: (c) 2014-15 David J. Bradshaw - dave@bradshaw.net
+ *  Copyright: (c) 2014 David J. Bradshaw - dave@bradshaw.net
  *  License: MIT
  */
 
-;(function() {
-  'use strict'
+(function(){
+  'use strict';
 
-  function scaleImageMap() {
-    function resizeMap() {
-      function resizeAreaTag(cachedAreaCoords, idx) {
-        function scale(coord) {
-          var dimension = 1 === (isWidth = 1 - isWidth) ? 'width' : 'height'
-          return (
-            padding[dimension] +
-            Math.floor(Number(coord) * scalingFactor[dimension])
-          )
-        }
+  function scaleImageMap(){
 
-        var isWidth = 0
-        areas[idx].coords = cachedAreaCoords
-          .split(',')
-          .map(scale)
-          .join(',')
+      function resizeMap() {
+          function resizeAreaTag(cachedAreaCoords){
+              function scaleCoord(e){
+                  return e * scallingFactor[(1===(isWidth = 1-isWidth) ? 'width' : 'height')];
+              }
+
+              var isWidth = 0;
+
+              return cachedAreaCoords.split(',').map(Number).map(scaleCoord).map(Math.floor).join(',');
+          }
+
+          var scallingFactor = {
+              width  : displayedImage.width  / sourceImage.width,
+              height : displayedImage.height / sourceImage.height
+          };
+
+          for (var i=0; i < areasLen ; i++) {
+              areas[i].coords = resizeAreaTag(cachedAreaCoordsArray[i]);
+          }
       }
 
-      var scalingFactor = {
-        width: image.width / image.naturalWidth,
-        height: image.height / image.naturalHeight,
+      function start(){
+          //WebKit asyncs image loading, so we have to catch the load event.
+          sourceImage.onload = function sourceImageOnLoadF(){
+              if ((displayedImage.width !== sourceImage.width) || (displayedImage.height !== sourceImage.height)) {
+                  resizeMap();
+              }
+          };
+          //Make copy of image, so we can get the actual size measurements
+          sourceImage.src = displayedImage.src;
       }
 
-      var padding = {
-        width: parseInt(
-          window.getComputedStyle(image, null).getPropertyValue('padding-left'),
-          10
-        ),
-        height: parseInt(
-          window.getComputedStyle(image, null).getPropertyValue('padding-top'),
-          10
-        ),
+      function listenForResize(){
+          function debounce() {
+              clearTimeout(timer);
+              timer = setTimeout(resizeMap, 250);
+          }
+          if (window.addEventListener) { window.addEventListener('resize', debounce, false); }
+          else if (window.attachEvent) { window.attachEvent('onresize', debounce); }
       }
 
-      cachedAreaCoordsArray.forEach(resizeAreaTag)
-    }
-
-    function getCoords(e) {
-      //Normalize coord-string to csv format without any space chars
-      return e.coords.replace(/ *, */g, ',').replace(/ +/g, ',')
-    }
-
-    function debounce() {
-      clearTimeout(timer)
-      timer = setTimeout(resizeMap, 250)
-    }
-
-    function start() {
-      if (
-        image.width !== image.naturalWidth ||
-        image.height !== image.naturalHeight
-      ) {
-        resizeMap()
+      function getCoords(e){
+          // normalize coord-string to csv format without any space chars
+          return e.coords.replace(/ *, */g,',').replace(/ +/g,',');
       }
-    }
 
-    function addEventListeners() {
-      image.addEventListener('load', resizeMap, false) //Detect late image loads in IE11
-      window.addEventListener('focus', resizeMap, false) //Cope with window being resized whilst on another tab
-      window.addEventListener('resize', debounce, false)
-      window.addEventListener('readystatechange', resizeMap, false)
-      document.addEventListener('fullscreenchange', resizeMap, false)
-    }
+      var
+          /*jshint validthis:true */
+          map                   = this, 
+          areas                 = map.getElementsByTagName('area'),
+          areasLen              = areas.length,
+          cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords),
+          displayedImage        = document.querySelector('img[usemap="#'+map.name+'"]'),
+          sourceImage           = new Image(),
+          timer                 = null;
 
-    function beenHere() {
-      return 'function' === typeof map._resize
-    }
-
-    function getImg(name) {
-      return document.querySelector('img[usemap="' + name + '"]')
-    }
-
-    function setup() {
-      areas = map.getElementsByTagName('area')
-      cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords)
-      image = getImg('#' + map.name) || getImg(map.name)
-      map._resize = resizeMap //Bind resize method to HTML map element
-    }
-
-    var /*jshint validthis:true */
-      map = this,
-      areas = null,
-      cachedAreaCoordsArray = null,
-      image = null,
-      timer = null
-
-    if (!beenHere()) {
-      setup()
-      addEventListeners()
-      start()
-    } else {
-      map._resize() //Already setup, so just resize map
-    }
+      start();
+      listenForResize();
   }
 
-  function factory() {
-    function chkMap(element) {
-      if (!element.tagName) {
-        throw new TypeError('Object is not a valid DOM element')
-      } else if ('MAP' !== element.tagName.toUpperCase()) {
-        throw new TypeError(
-          'Expected <MAP> tag, found <' + element.tagName + '>.'
-        )
-      }
-    }
 
-    function init(element) {
-      if (element) {
-        chkMap(element)
-        scaleImageMap.call(element)
-        maps.push(element)
-      }
-    }
 
-    var maps
+  function factory(){
+      function init(element){
+          if(!element.tagName) {
+              throw new TypeError('Object is not a valid DOM element');
+          } else if ('MAP' !== element.tagName.toUpperCase()) {
+              throw new TypeError('Expected <MAP> tag, found <'+element.tagName+'>.');
+          }
 
-    return function imageMapResizeF(target) {
-      maps = [] // Only return maps from this call
-
-      switch (typeof target) {
-        case 'undefined':
-        case 'string':
-          Array.prototype.forEach.call(
-            document.querySelectorAll(target || 'map'),
-            init
-          )
-          break
-        case 'object':
-          init(target)
-          break
-        default:
-          throw new TypeError('Unexpected data type (' + typeof target + ').')
+          scaleImageMap.call(element);
       }
 
-      return maps
-    }
+      return function imageMapResizeF(target){
+          switch (typeof(target)){
+              case 'undefined':
+              case 'string':
+                  Array.prototype.forEach.call(document.querySelectorAll(target||'map'),init);
+                  break;
+              case 'object':
+                  init(target);
+                  break;
+              default:
+                  throw new TypeError('Unexpected data type ('+typeof(target)+').');
+          }
+      };
   }
+
 
   if (typeof define === 'function' && define.amd) {
-    define([], factory)
-  } else if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = factory() //Node for browserfy
+      define([],factory);
+  } else if (typeof exports === 'object') { //Node for browserfy
+      module.exports = factory();
   } else {
-    window.imageMapResize = factory()
+      window.imageMapResize = factory();
   }
 
-  if ('jQuery' in window) {
-    window.jQuery.fn.imageMapResize = function $imageMapResizeF() {
-      return this.filter('map')
-        .each(scaleImageMap)
-        .end()
-    }
+
+  if('jQuery' in window) {
+      jQuery.fn.imageMapResize = function $imageMapResizeF(){
+          return this.filter('map').each(scaleImageMap).end();
+      };
   }
-})()
+
+})();

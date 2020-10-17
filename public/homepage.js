@@ -127,7 +127,7 @@ calculate_btn.addEventListener('click', function() {
 function state_hovered(state_img, state_area){
     state_img.style.position = "absolute";
             state_img.style.width = "88vw"
-            state_img.style.height = "705px"
+            state_img.style.height = "38vw"
             state_img.style.marginLeft = "5vw";
             state_img.style.marginTop = "3vw";
             state_img.style.zIndex = "20";
@@ -143,7 +143,7 @@ function state_hovered(state_img, state_area){
             hovd = true
             state_img.style.position = "absolute";
             state_img.style.width = "88vw"
-            state_img.style.height = "705px"
+            state_img.style.height = "38vw"
             state_img.style.marginLeft = "5vw";
             state_img.style.marginTop = "3vw";
             state_img.style.zIndex = "20";
@@ -192,9 +192,9 @@ for(area of map_fg_areas){
         ar.setAttribute("href", "#" + state_name)
         console.log(ar.attributes)
         console.log(state_img.attributes.src)
-        state_img.style.width = "88vw"
-        state_img.style.height = "705px"
-        state_img.style.marginLeft = "5vw";
+        state_img.style.width = "80vw"
+        state_img.style.height = "34vw"
+        state_img.style.marginLeft = "6vw";
         state_img.style.marginTop = "3vw";
         state_img.style.zIndex = "20";
         state_img.style.display = "initial";
@@ -652,8 +652,6 @@ function create_hour_precip_dic(morning_data, evening_data, hist_data, forecast_
         }
     }
 }
-
-
 
 
 

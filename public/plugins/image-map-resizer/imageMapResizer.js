@@ -16,7 +16,6 @@
                 }
 
                 var isWidth = 0;
-
                 return cachedAreaCoords.split(',').map(Number).map(scaleCoord).map(Math.floor).join(',');
             }
 
@@ -24,7 +23,7 @@
                 width  : displayedImage.width  / 1375,
                 height : displayedImage.height / 670
             };
-
+            
             for (var i=0; i < areasLen ; i++) {
                 areas[i].coords = resizeAreaTag(cachedAreaCoordsArray[i]);
             }
@@ -55,15 +54,24 @@
             return e.coords.replace(/ *, */g,',').replace(/ +/g,',');
         }
 
-        var
-            /*jshint validthis:true */
-            map                   = this, 
-            areas                 = map.getElementsByTagName('area'),
-            areasLen              = areas.length,
-            cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords),
-            displayedImage        = document.querySelector('img[usemap="#'+map.name+'"]'),
-            sourceImage           = new Image(),
-            timer                 = null;
+        var is_overlay = false,
+        map = this,
+        displayedImage        = document.querySelector('img[usemap="#'+map.name+'"]');
+        if(map.className == "maps-overlay"){
+            var dis_map = document.querySelector('#background-map') 
+            displayedImage = document.querySelector('img[usemap="#'+dis_map.name+'"]');
+        }
+        var areas                 = map.getElementsByTagName('area'),
+        areasLen              = areas.length,
+        cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords),
+        sourceImage           = new Image(),
+        timer                 = null;
+
+        if(is_overlay == true){
+            map = document.querySelector(".maps-overlay")
+            // console.log(map)
+        }
+            
 
         start();
         listenForResize();
