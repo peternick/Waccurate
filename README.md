@@ -1,5 +1,5 @@
 # Waccurate
- A desktop application using HTML, CSS, Javascript, Bootstrap, and NodeJs that shows how accurate Accuweather's forecasts are based on different variables.
+ A web application using HTML, CSS, Javascript, Bootstrap, and NodeJs that shows how accurate Accuweather's forecasts are based on different variables.
 <img src="public/media/pictures/Waccurate title.png">
 
 <h2>Overview</h2>
